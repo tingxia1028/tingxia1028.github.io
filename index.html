@@ -106,12 +106,19 @@
 <h2 id="leave-over"><a href="#leave-over" class="headerlink" title="leave over"></a>leave over</h2><ul>
 <li>MSAA and FXAA</li>
 <li>visual studio code template plugin</li>
+<li>c++ 堆，栈变量申请和内存连续问题</li>
+<li>engine task schedule</li>
 </ul>
-<h2 id="脑洞"><a href="#脑洞" class="headerlink" title="脑洞"></a>脑洞</h2>
+<h2 id="脑洞"><a href="#脑洞" class="headerlink" title="脑洞"></a>脑洞</h2><ul>
+<li><p>cache miss 性能问题<br>为了解决cache miss，使用array&lt;bitset&gt;来存储cluster和point lights的对应关系，但是bitset的轮询实在是慢。<br>bitset有没有好的轮训方式，查到的array&lt;bool&gt;据说更快。</p>
+<p>很多cluster shading的lights assignment都是通过computer shader并行做的，这样更好。同理，cpu上的lights assignment也可以分成多线程并发计算，可能要考虑数据的并发写入问题。</p>
+</li>
+</ul>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/10/22/plan-2020-10-22/" data-id="ckgklrtow00013h0e89xwb1hx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/10/22/plan-2020-10-22/" data-id="ckgkmesl700017y0e13q21ioz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -200,7 +207,57 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/13/many_lights_intro/" data-id="ckgklrtos00003h0e6im5g5gu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/02/13/many_lights_intro/" data-id="ckgkmesl200007y0e2bmeayia" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-motions" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/13/motions/" class="article-date">
+  <time datetime="2020-02-12T22:47:19.844Z" itemprop="datePublished">2020-02-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/motions/">motions</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/13/motions/">所有的路都不是白白经过的啊</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>卡萨布兰卡里有句话是这样说的</p>
+<p>如今你的气质里</p>
+<p>藏着你走过的路</p>
+<p>读过的书</p>
+<p>和爱过的人</p>
+<p>所以我会一直行走</p>
+<p>阅读</p>
+<p>信任爱的力量</p>
+<p>最后到老了对自己说一声</p>
+<p>所有的路都不是白白经过的啊</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/02/13/motions/" data-id="ckgkmesl900037y0eadf6a1in" class="article-share-link">Share</a>
       
       
     </footer>
@@ -256,57 +313,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/13/plan_2020_10_14/" data-id="ckgklrtoy00033h0eazrr648a" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-motions" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/02/13/motions/" class="article-date">
-  <time datetime="2020-02-12T22:47:19.844Z" itemprop="datePublished">2020-02-13</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/motions/">motions</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/13/motions/">所有的路都不是白白经过的啊</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>卡萨布兰卡里有句话是这样说的</p>
-<p>如今你的气质里</p>
-<p>藏着你走过的路</p>
-<p>读过的书</p>
-<p>和爱过的人</p>
-<p>所以我会一直行走</p>
-<p>阅读</p>
-<p>信任爱的力量</p>
-<p>最后到老了对自己说一声</p>
-<p>所有的路都不是白白经过的啊</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/13/motions/" data-id="ckgklrtoz00043h0e8dqwaquc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/02/13/plan_2020_10_14/" data-id="ckgkmeslo00097y0e2xjg1gb8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -362,11 +369,11 @@
           </li>
         
           <li>
-            <a href="/2020/02/13/plan_2020_10_14/">2020.10.14 plans</a>
+            <a href="/2020/02/13/motions/">所有的路都不是白白经过的啊</a>
           </li>
         
           <li>
-            <a href="/2020/02/13/motions/">所有的路都不是白白经过的啊</a>
+            <a href="/2020/02/13/plan_2020_10_14/">2020.10.14 plans</a>
           </li>
         
       </ul>
