@@ -15,7 +15,7 @@
 <meta property="og:description" content="courses sig15 snow  realization parallax mapping  research snow and rain  leave over MSAA and FXAA visual studio code template plugin c++ 堆，栈变量申请和内存连续问题 engine task schedule  脑洞 cache miss 性能问题为了解决cac">
 <meta property="og:locale" content="zh">
 <meta property="article:published_time" content="2020-10-22T09:03:00.000Z">
-<meta property="article:modified_time" content="2020-10-22T09:25:38.512Z">
+<meta property="article:modified_time" content="2020-10-22T09:28:53.012Z">
 <meta property="article:author" content="Ting Xia">
 <meta name="twitter:card" content="summary">
   
@@ -112,7 +112,7 @@
 <li>engine task schedule</li>
 </ul>
 <h2 id="脑洞"><a href="#脑洞" class="headerlink" title="脑洞"></a>脑洞</h2><ul>
-<li><p>cache miss 性能问题<br>为了解决cache miss，使用array&lt;bitset&gt;来存储cluster和point lights的对应关系，但是bitset的轮询实在是慢。<br>bitset有没有好的轮训方式，查到的array&lt;bool&gt;据说更快。</p>
+<li><p>cache miss 性能问题<br>为了解决cache miss，使用array&lt;bitset&gt;来存储cluster和point lights的对应关系，但是bitset的轮询实在是慢。<br>bitset有没有<a href="https://lemire.me/blog/2018/02/21/iterating-over-set-bits-quickly/" target="_blank" rel="noopener">好的轮询方式</a>，查到的array&lt;bool&gt;据说更快。</p>
 <p>很多cluster shading的lights assignment都是通过computer shader并行做的，这样更好。同理，cpu上的lights assignment也可以分成多线程并发计算，可能要考虑数据的并发写入问题。</p>
 </li>
 </ul>
@@ -120,7 +120,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/10/22/plan-2020-10-22/" data-id="ckgkmfufs00038z0e88n7fphj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/10/22/plan-2020-10-22/" data-id="ckgkmioj30004a90eagyd5q6p" class="article-share-link">Share</a>
       
       
     </footer>
@@ -130,9 +130,9 @@
 <nav id="article-nav">
   
   
-    <a href="/2020/02/13/many_lights_intro/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2020/02/13/motions/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">thousands of lights(intro)</div>
+      <div class="article-nav-title">所有的路都不是白白经过的啊</div>
     </a>
   
 </nav>
@@ -180,11 +180,11 @@
           </li>
         
           <li>
-            <a href="/2020/02/13/many_lights_intro/">thousands of lights(intro)</a>
+            <a href="/2020/02/13/motions/">所有的路都不是白白经过的啊</a>
           </li>
         
           <li>
-            <a href="/2020/02/13/motions/">所有的路都不是白白经过的啊</a>
+            <a href="/2020/02/13/many_lights_intro/">thousands of lights(intro)</a>
           </li>
         
           <li>
