@@ -15,7 +15,7 @@
 <meta property="og:description" content="courses sig15 snow  realization parallax mapping learnopengl base principle    research snow and rain  leave over MSAA and FXAA visual studio code template plugin c++ 堆，栈变量申请和内存连续问题 engine task schedu">
 <meta property="og:locale" content="zh">
 <meta property="article:published_time" content="2020-10-22T09:03:00.000Z">
-<meta property="article:modified_time" content="2020-10-22T09:33:49.194Z">
+<meta property="article:modified_time" content="2020-10-23T07:41:16.999Z">
 <meta property="article:author" content="Ting Xia">
 <meta name="twitter:card" content="summary">
   
@@ -118,12 +118,14 @@
 <li><p>cache miss 性能问题<br>为了解决cache miss，使用array&lt;bitset&gt;来存储cluster和point lights的对应关系，但是bitset的轮询实在是慢。<br>bitset有没有<a href="https://lemire.me/blog/2018/02/21/iterating-over-set-bits-quickly/" target="_blank" rel="noopener">好的轮询方式</a>，查到的array&lt;bool&gt;据说更快。</p>
 <p>很多cluster shading的lights assignment都是通过computer shader并行做的，这样更好。同理，cpu上的lights assignment也可以分成多线程并发计算，可能要考虑数据的并发写入问题。</p>
 </li>
+<li><p>texture uv mapping<br>如何生成一个object的uv，使得样本点少且畸变小，平面比较容易，曲面曲线又应该如何采样？</p>
+</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/10/22/plan-2020-10-22/" data-id="ckgly1ajv0004ra0eadj03c33" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/10/22/plan-2020-10-22/" data-id="ckgly4lyu0005tf0e1nrw721g" class="article-share-link">Share</a>
       
       
     </footer>
@@ -142,9 +144,9 @@
     </a>
   
   
-    <a href="/2020/02/13/many_lights_intro/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2020/02/13/motions/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">thousands of lights(intro)</div>
+      <div class="article-nav-title">所有的路都不是白白经过的啊</div>
     </a>
   
 </nav>
@@ -196,11 +198,11 @@
           </li>
         
           <li>
-            <a href="/2020/02/13/many_lights_intro/">thousands of lights(intro)</a>
+            <a href="/2020/02/13/motions/">所有的路都不是白白经过的啊</a>
           </li>
         
           <li>
-            <a href="/2020/02/13/motions/">所有的路都不是白白经过的啊</a>
+            <a href="/2020/02/13/many_lights_intro/">thousands of lights(intro)</a>
           </li>
         
           <li>
