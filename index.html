@@ -95,35 +95,35 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="tangent-space"><a href="#tangent-space" class="headerlink" title="tangent space"></a>tangent space</h2><ul>
-<li>why need tangent space<br>使得不同朝向的表面可以使用同一个法线贴图。<br><img src="./images/1603418547481.png" alt=""></li>
+<li>why need tangent space<br>使得不同朝向的表面可以使用同一个法线贴图。<br><img src="/images/1603418547481.png" alt=""></li>
 <li>how to solve it<br>在一个不同的坐标空间中进行光照，这个坐标空间里，法线贴图向量总是指向这个坐标空间的正z方向；所有的光照向量都相对与这个正z方向进行变换。这样我们就能始终使用同样的法线贴图，不管朝向问题。这个坐标空间叫做切线空间（tangent space）。</li>
 <li>uv mapping<br>3d surface unfolded in a single piece onto a 2D canvas  –&gt; keep the number of seams to a minimum<br>如何生成object的uv是另外一个比较大的topic，以后可以看看<br><a href="https://www.spiria.com/en/blog/desktop-software/understanding-uv-mapping-and-textures/" target="_blank" rel="noopener">https://www.spiria.com/en/blog/desktop-software/understanding-uv-mapping-and-textures/</a></li>
-<li>怎么想的把uv 和 3d的 TBN space 联系到一起的？<br><strong>每个mesh计算一个TBN空间，存储在顶点 —&gt;  关键点</strong><br>切线空间是相对于每一个顶点的，也就是说这个法线信息是基于每一个顶点的相对值，可以理解成是一种扰动。<br><img src="./images/1603434568282.png" alt=""><br>以每个triangle mesh为单位，以mesh的法线变换到tangent space为(0, 0, 1)为目标确定tangent space.<br><img src="./images/1603434939023.png" alt=""><br> 竖轴同样是面法向量，但是有多种不同的x和y轴组合，每种组合生成的点法向量是不一致的，所以需要规定一套固定的x和y轴，大家遵守同样的规则。怎么规定呢？就用纹理的uv坐标来定。具体做法是，取该点所在的三角形的三个顶点P1.P2.P3的纹理U和V坐标，然后x轴的方向就是P3指向P1，又称T轴；y轴方向是P3指向P2，又称B轴。</li>
+<li>怎么想的把uv 和 3d的 TBN space 联系到一起的？<br><strong>每个mesh计算一个TBN空间，存储在顶点 —&gt;  关键点</strong><br>切线空间是相对于每一个顶点的，也就是说这个法线信息是基于每一个顶点的相对值，可以理解成是一种扰动。<br><img src="/images/1603434568282.png" alt=""><br>以每个triangle mesh为单位，以mesh的法线变换到tangent space为(0, 0, 1)为目标确定tangent space.<br><img src="/images/1603434939023.png" alt=""><br> 竖轴同样是面法向量，但是有多种不同的x和y轴组合，每种组合生成的点法向量是不一致的，所以需要规定一套固定的x和y轴，大家遵守同样的规则。怎么规定呢？就用纹理的uv坐标来定。具体做法是，取该点所在的三角形的三个顶点P1.P2.P3的纹理U和V坐标，然后x轴的方向就是P3指向P1，又称T轴；y轴方向是P3指向P2，又称B轴。</li>
 </ul>
-<h2 id="parallax-mapping"><a href="#parallax-mapping" class="headerlink" title="parallax mapping"></a>parallax mapping</h2><p><img src="./images/1603359412729.png" alt=""></p>
-<h3 id="key-point"><a href="#key-point" class="headerlink" title="key point"></a>key point</h3><p><strong>根据视线方向扰动纹理坐标(uv)</strong>使一个fragment的表面看起来比实际的更高或者更低，所有这些都根据观察方向和高度贴图。<br>eg.<br><img src="./images/1603359522217.png" alt=""><br>用B点的纹理坐标代替A点原本的纹理坐标。<br>？？如何从点A得到点B的纹理坐标</p>
+<h2 id="parallax-mapping"><a href="#parallax-mapping" class="headerlink" title="parallax mapping"></a>parallax mapping</h2><p><img src="/images/1603359412729.png" alt=""></p>
+<h3 id="key-point"><a href="#key-point" class="headerlink" title="key point"></a>key point</h3><p><strong>根据视线方向扰动纹理坐标(uv)</strong>使一个fragment的表面看起来比实际的更高或者更低，所有这些都根据观察方向和高度贴图。<br>eg.<br><img src="/images/1603359522217.png" alt=""><br>用B点的纹理坐标代替A点原本的纹理坐标。<br>？？如何从点A得到点B的纹理坐标</p>
 <h3 id="details"><a href="#details" class="headerlink" title="details"></a>details</h3><ul>
-<li>basic realization<br><img src="./images/1603434287334.png" alt=""><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">vec2</span> ParallaxMapping(<span class="type">vec2</span> texCoords, <span class="type">vec3</span> viewDir)</span><br><span class="line">&#123; </span><br><span class="line">    <span class="type">float</span> height =  <span class="built_in">texture</span>(depthMap, texCoords).r;    </span><br><span class="line">    <span class="type">vec3</span> p = viewDir.xy / viewDir.z * (height * height_scale);</span><br><span class="line">    <span class="keyword">return</span> texCoords - p;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>basic realization<br><img src="/images/1603434287334.png" alt=""><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">vec2</span> ParallaxMapping(<span class="type">vec2</span> texCoords, <span class="type">vec3</span> viewDir)</span><br><span class="line">&#123; </span><br><span class="line">    <span class="type">float</span> height =  <span class="built_in">texture</span>(depthMap, texCoords).r;    </span><br><span class="line">    <span class="type">vec3</span> p = viewDir.xy / viewDir.z * (height * height_scale);</span><br><span class="line">    <span class="keyword">return</span> texCoords - p;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li>better realization<ul>
-<li>Steep Parallax Mapping<br><img src="./images/1603434388078.png" alt=""><br>寻找更加接近的uv offset</li>
+<li>Steep Parallax Mapping<br><img src="/images/1603434388078.png" alt=""><br>寻找更加接近的uv offset</li>
 <li>Parallax Occlusion Mapping<br>解决Steep Parallax Mapping的锯齿问题<br>两个最接近临点的插值</li>
 </ul>
 </li>
 </ul>
-<h2 id="bump-mapping"><a href="#bump-mapping" class="headerlink" title="bump mapping"></a>bump mapping</h2><p><img src="./images/1603436979292.png" alt=""></p>
+<h2 id="bump-mapping"><a href="#bump-mapping" class="headerlink" title="bump mapping"></a>bump mapping</h2><p><img src="/images/1603436979292.png" alt=""></p>
 <h3 id="key-point-1"><a href="#key-point-1" class="headerlink" title="key point"></a>key point</h3><p>根据高度扰动法线</p>
 <h3 id="details-1"><a href="#details-1" class="headerlink" title="details"></a>details</h3><ul>
-<li>basic principle<br><img src="./images/1603436810326.png" alt=""><br>根据bump map中的height信息计算新的normal</li>
+<li>basic principle<br><img src="/images/1603436810326.png" alt=""><br>根据bump map中的height信息计算新的normal</li>
 <li>better realization —&gt; normal map</li>
 </ul>
-<h2 id="displacement-mapping"><a href="#displacement-mapping" class="headerlink" title="displacement mapping"></a>displacement mapping</h2><p><img src="./images/1603437189613.png" alt=""></p>
+<h2 id="displacement-mapping"><a href="#displacement-mapping" class="headerlink" title="displacement mapping"></a>displacement mapping</h2><p><img src="/images/1603437189613.png" alt=""></p>
 <h3 id="key-point-2"><a href="#key-point-2" class="headerlink" title="key point"></a>key point</h3><p>using a (procedural-) texture- or height map to cause an effect where the <strong>actual geometric position of points over the textured surface are displaced</strong>, often along the local surface normal, according to the value the texture function evaluates to at each point on the surface.</p>
 <h3 id="detail"><a href="#detail" class="headerlink" title="detail"></a>detail</h3><p>vertex shader or geometry shader</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/10/23/more%20dimensional/" data-id="ckglxqjua0001o90e1yri1mwk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/10/23/more%20dimensional/" data-id="ckgly1aju0003ra0e3hidb6cu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -186,7 +186,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/10/22/plan-2020-10-22/" data-id="ckglxqjud0004o90e29whhzee" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/10/22/plan-2020-10-22/" data-id="ckgly1ajv0004ra0eadj03c33" class="article-share-link">Share</a>
       
       
     </footer>
@@ -203,7 +203,7 @@
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/thousands-of-lights/">thousands of lights</a>
+    <a class="article-category-link" href="/categories/lights/">lights</a>
   </div>
 
   </div>
@@ -224,58 +224,58 @@
       
         <h2 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h2><p>chrome-extension://cdonnmffkdaoajfknoeeecmchibpmkmg/assets/pdf/web/viewer.html?file=https%3A%2F%2Fnewq.net%2Fdl%2Fpub%2FSA2014ManyLightIntro.pdf</p>
 <h2 id="key-point-—-light-assignment-light-culling"><a href="#key-point-—-light-assignment-light-culling" class="headerlink" title="key point —- light assignment / light culling"></a>key point —- light assignment / light culling</h2><p>which lights affect what pieces of geometry</p>
-<h2 id="state-of-art"><a href="#state-of-art" class="headerlink" title="state of art"></a>state of art</h2><h3 id="forward-shading"><a href="#forward-shading" class="headerlink" title="forward shading"></a>forward shading</h3><p>  <img src="./images/1602656348700.png" alt=""></p>
+<h2 id="state-of-art"><a href="#state-of-art" class="headerlink" title="state of art"></a>state of art</h2><h3 id="forward-shading"><a href="#forward-shading" class="headerlink" title="forward shading"></a>forward shading</h3><p>  <img src="/images/1602656348700.png" alt=""></p>
 <ul>
 <li>conflicts:<ul>
-<li>batch size<br><img src="./images/1602656370432.png" alt=""><ul>
+<li>batch size<br><img src="/images/1602656370432.png" alt=""><ul>
 <li>希望一个batch涉及的lights尽可能少， batch中的物体可能就会比较少</li>
 <li>希望batch总数尽可能少，减少draw call，batch中的物体可能就比较多</li>
 </ul>
 </li>
-<li>different scenarios need different ways to render<br><img src="./images/1602656768659.png" alt=""></li>
+<li>different scenarios need different ways to render<br><img src="/images/1602656768659.png" alt=""></li>
 </ul>
 </li>
-<li>summary:<br><img src="./images/1602657026808.png" alt=""><br>一些不必要的物体也进行了渲染（eg. depth test）<br>需要兼容各种灯光类型的排列组合，但是 gpu register is limited</li>
+<li>summary:<br><img src="/images/1602657026808.png" alt=""><br>一些不必要的物体也进行了渲染（eg. depth test）<br>需要兼容各种灯光类型的排列组合，但是 gpu register is limited</li>
 </ul>
-<h3 id="deferred-shading"><a href="#deferred-shading" class="headerlink" title="deferred shading"></a>deferred shading</h3><p>  <img src="./images/1602657449012.png" alt=""><br>  大概思想是把shading延后，先只保存每个像素的geometry attributes，之后另起一个pass，一次着色处理所有lights和每一个fragment</p>
+<h3 id="deferred-shading"><a href="#deferred-shading" class="headerlink" title="deferred shading"></a>deferred shading</h3><p>  <img src="/images/1602657449012.png" alt=""><br>  大概思想是把shading延后，先只保存每个像素的geometry attributes，之后另起一个pass，一次着色处理所有lights和每一个fragment</p>
 <ul>
-<li>summary:<br><img src="./images/1602657946425.png" alt=""><br>最大的问题在于 GPU Compute Capacity is greater than the memory bandwidth<br><img src="./images/1602659485520.png" alt=""></li>
+<li>summary:<br><img src="/images/1602657946425.png" alt=""><br>最大的问题在于 GPU Compute Capacity is greater than the memory bandwidth<br><img src="/images/1602659485520.png" alt=""></li>
 </ul>
-<h3 id="tiled-deferred-forward-shading"><a href="#tiled-deferred-forward-shading" class="headerlink" title="tiled deferred/forward shading"></a>tiled deferred/forward shading</h3><p>  思考如何解决bandwidth问题：<br>  <img src="./images/1602659630982.png" alt=""></p>
+<h3 id="tiled-deferred-forward-shading"><a href="#tiled-deferred-forward-shading" class="headerlink" title="tiled deferred/forward shading"></a>tiled deferred/forward shading</h3><p>  思考如何解决bandwidth问题：<br>  <img src="/images/1602659630982.png" alt=""></p>
 <ul>
 <li><p>assign lights<br> 那么如何decide每个fragment对应的lights，如果针对每个fragment去assign lights又很费，how to balance？</p>
 <ul>
-<li>assignment unit: tile<br><img src="./images/1602660612956.png" alt=""><ul>
-<li>find light boundingbox<br><img src="./images/1602660651870.png" alt=""></li>
-<li>assign lights to each tile<br><img src="./images/1602660682508.png" alt=""></li>
+<li>assignment unit: tile<br><img src="/images/1602660612956.png" alt=""><ul>
+<li>find light boundingbox<br><img src="/images/1602660651870.png" alt=""></li>
+<li>assign lights to each tile<br><img src="/images/1602660682508.png" alt=""></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>render process<br><img src="./images/1602660777745.png" alt=""><br><img src="./images/1602660928353.png" alt=""></p>
+<li><p>render process<br><img src="/images/1602660777745.png" alt=""><br><img src="/images/1602660928353.png" alt=""></p>
 </li>
-<li><p>summary<br><img src="./images/1602661341379.png" alt=""><br>因为light assignment是在2d上做的，所以可能存在一种问题，tile一共被n个lights覆盖，但是某些pixel可能只被很少的lights覆盖。</p>
+<li><p>summary<br><img src="/images/1602661341379.png" alt=""><br>因为light assignment是在2d上做的，所以可能存在一种问题，tile一共被n个lights覆盖，但是某些pixel可能只被很少的lights覆盖。</p>
 </li>
 </ul>
 <h3 id="clustered-deferred-forward-shading"><a href="#clustered-deferred-forward-shading" class="headerlink" title="clustered deferred/forward shading"></a>clustered deferred/forward shading</h3><ul>
-<li>思路<br>针对以上问题，把depth也加入assignment，做3d的tile<br><img src="./images/1602661503485.png" alt=""><br><img src="./images/1602661780187.png" alt=""></li>
-<li>algorithm<br><img src="./images/1602662109931.png" alt=""><ul>
-<li>cluster assignment<br><img src="./images/1602662365181.png" alt=""><br>depth dimension,  log(z) -&gt; int, 越远的cluster越长</li>
-<li>find unique clusters —-  find non-empty cluster and compact<br><img src="./images/1602663071511.png" alt=""><ul>
-<li>light assignment<br><img src="./images/1602663892477.png" alt=""></li>
+<li>思路<br>针对以上问题，把depth也加入assignment，做3d的tile<br><img src="/images/1602661503485.png" alt=""><br><img src="/images/1602661780187.png" alt=""></li>
+<li>algorithm<br><img src="/images/1602662109931.png" alt=""><ul>
+<li>cluster assignment<br><img src="/images/1602662365181.png" alt=""><br>depth dimension,  log(z) -&gt; int, 越远的cluster越长</li>
+<li>find unique clusters —-  find non-empty cluster and compact<br><img src="/images/1602663071511.png" alt=""><ul>
+<li>light assignment<br><img src="/images/1602663892477.png" alt=""></li>
 </ul>
 </li>
 </ul>
 </li>
-<li>full screen render pass<br><img src="./images/1602663330462.png" alt=""><br>和tiled shading不同的是如何计算某个cluster对应的light grid</li>
-<li>summary<br><img src="./images/1602663800893.png" alt=""><br>对于透明物体渲染友好，这个比较好理解，因为tiled shading是2d的tile，cluster shading是3d的cluster.</li>
+<li>full screen render pass<br><img src="/images/1602663330462.png" alt=""><br>和tiled shading不同的是如何计算某个cluster对应的light grid</li>
+<li>summary<br><img src="/images/1602663800893.png" alt=""><br>对于透明物体渲染友好，这个比较好理解，因为tiled shading是2d的tile，cluster shading是3d的cluster.</li>
 </ul>
-<h3 id="所有方法对比"><a href="#所有方法对比" class="headerlink" title="所有方法对比"></a>所有方法对比</h3><p><img src="./images/1602664064674.png" alt=""></p>
+<h3 id="所有方法对比"><a href="#所有方法对比" class="headerlink" title="所有方法对比"></a>所有方法对比</h3><p><img src="/images/1602664064674.png" alt=""></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/13/many_lights_intro/" data-id="ckglxqju50000o90e0laxaeb0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/02/13/many_lights_intro/" data-id="ckgly1ajn0000ra0e5jk40eud" class="article-share-link">Share</a>
       
       
     </footer>
@@ -325,7 +325,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/13/motions/" data-id="ckglxqjuc0003o90e8m6ea0gv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/02/13/motions/" data-id="ckgly1ajs0001ra0edh8k01cp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -381,7 +381,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/13/plan_2020_10_14/" data-id="ckglxqjud0005o90e5xiqclha" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/02/13/plan_2020_10_14/" data-id="ckgly1ajv0005ra0e7cgo8kp0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -401,7 +401,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/motions/">motions</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/plan-tips/">plan tips</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/texture-mapping/">texture mapping</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/thousands-of-lights/">thousands of lights</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/lights/">lights</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/motions/">motions</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/plan-tips/">plan tips</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/texture-mapping/">texture mapping</a></li></ul>
     </div>
   </div>
 
