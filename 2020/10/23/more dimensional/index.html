@@ -25,7 +25,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/10/23/more%20dimensional/images/1603436810326.png">
 <meta property="og:image" content="http://yoursite.com/2020/10/23/more%20dimensional/images/1603437189613.png">
 <meta property="article:published_time" content="2020-10-23T07:03:00.000Z">
-<meta property="article:modified_time" content="2020-10-23T07:25:33.598Z">
+<meta property="article:modified_time" content="2020-10-23T07:29:09.847Z">
 <meta property="article:author" content="Ting Xia">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/2020/10/23/more%20dimensional/images/1603418547481.png">
@@ -114,10 +114,7 @@
 <li>怎么想的把uv 和 3d的 TBN space 联系到一起的？<br><strong>每个mesh计算一个TBN空间，存储在顶点 —&gt;  关键点</strong><br>切线空间是相对于每一个顶点的，也就是说这个法线信息是基于每一个顶点的相对值，可以理解成是一种扰动。<br><img src="./images/1603434568282.png" alt=""><br>以每个triangle mesh为单位，以mesh的法线变换到tangent space为(0, 0, 1)为目标确定tangent space.<br><img src="./images/1603434939023.png" alt=""><br> 竖轴同样是面法向量，但是有多种不同的x和y轴组合，每种组合生成的点法向量是不一致的，所以需要规定一套固定的x和y轴，大家遵守同样的规则。怎么规定呢？就用纹理的uv坐标来定。具体做法是，取该点所在的三角形的三个顶点P1.P2.P3的纹理U和V坐标，然后x轴的方向就是P3指向P1，又称T轴；y轴方向是P3指向P2，又称B轴。</li>
 </ul>
 <h2 id="parallax-mapping"><a href="#parallax-mapping" class="headerlink" title="parallax mapping"></a>parallax mapping</h2><p><img src="./images/1603359412729.png" alt=""></p>
-<h3 id="key-point"><a href="#key-point" class="headerlink" title="key point"></a>key point</h3><p><strong>根据视线方向扰动纹理坐标(uv)</strong>使一个fragment的表面看起来比实际的更高或者更低，所有这些都根据观察方向和高度贴图。<br>eg.<br><img src="./images/1603359522217.png" alt=""><br>用B点的纹理坐标代替A点原本的纹理坐标。</p>
-<blockquote>
-<p>如何从点A得到点B的纹理坐标</p>
-</blockquote>
+<h3 id="key-point"><a href="#key-point" class="headerlink" title="key point"></a>key point</h3><p><strong>根据视线方向扰动纹理坐标(uv)</strong>使一个fragment的表面看起来比实际的更高或者更低，所有这些都根据观察方向和高度贴图。<br>eg.<br><img src="./images/1603359522217.png" alt=""><br>用B点的纹理坐标代替A点原本的纹理坐标。<br>？？如何从点A得到点B的纹理坐标</p>
 <h3 id="details"><a href="#details" class="headerlink" title="details"></a>details</h3><ul>
 <li>basic realization<br><img src="./images/1603434287334.png" alt=""><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">vec2</span> ParallaxMapping(<span class="type">vec2</span> texCoords, <span class="type">vec3</span> viewDir)</span><br><span class="line">&#123; </span><br><span class="line">    <span class="type">float</span> height =  <span class="built_in">texture</span>(depthMap, texCoords).r;    </span><br><span class="line">    <span class="type">vec3</span> p = viewDir.xy / viewDir.z * (height * height_scale);</span><br><span class="line">    <span class="keyword">return</span> texCoords - p;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li>better realization<ul>
@@ -139,7 +136,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/10/23/more%20dimensional/" data-id="ckglxljhm0003kx0e83s92l9k" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/10/23/more%20dimensional/" data-id="ckglxoica0002mm0e96gl2kfu" class="article-share-link">Share</a>
       
       
     </footer>
