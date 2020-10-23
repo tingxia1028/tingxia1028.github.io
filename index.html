@@ -68,6 +68,74 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-more dimensional" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/10/23/more%20dimensional/" class="article-date">
+  <time datetime="2020-10-23T07:03:00.000Z" itemprop="datePublished">2020-10-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/texture-mapping/">texture mapping</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/23/more%20dimensional/">more dimensional</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="tangent-space"><a href="#tangent-space" class="headerlink" title="tangent space"></a>tangent space</h2><ul>
+<li>why need tangent space<br>使得不同朝向的表面可以使用同一个法线贴图。<br><img src="./images/1603418547481.png" alt=""></li>
+<li>how to solve it<br>在一个不同的坐标空间中进行光照，这个坐标空间里，法线贴图向量总是指向这个坐标空间的正z方向；所有的光照向量都相对与这个正z方向进行变换。这样我们就能始终使用同样的法线贴图，不管朝向问题。这个坐标空间叫做切线空间（tangent space）。</li>
+<li>uv mapping<br>3d surface unfolded in a single piece onto a 2D canvas  –&gt; keep the number of seams to a minimum<br>如何生成object的uv是另外一个比较大的topic，以后可以看看<br><a href="https://www.spiria.com/en/blog/desktop-software/understanding-uv-mapping-and-textures/" target="_blank" rel="noopener">https://www.spiria.com/en/blog/desktop-software/understanding-uv-mapping-and-textures/</a></li>
+<li>怎么想的把uv 和 3d的 TBN space 联系到一起的？<br><strong>每个mesh计算一个TBN空间，存储在顶点 —&gt;  关键点</strong><br>切线空间是相对于每一个顶点的，也就是说这个法线信息是基于每一个顶点的相对值，可以理解成是一种扰动。<br><img src="./images/1603434568282.png" alt=""><br>以每个triangle mesh为单位，以mesh的法线变换到tangent space为(0, 0, 1)为目标确定tangent space.<br><img src="./images/1603434939023.png" alt=""><br> 竖轴同样是面法向量，但是有多种不同的x和y轴组合，每种组合生成的点法向量是不一致的，所以需要规定一套固定的x和y轴，大家遵守同样的规则。怎么规定呢？就用纹理的uv坐标来定。具体做法是，取该点所在的三角形的三个顶点P1.P2.P3的纹理U和V坐标，然后x轴的方向就是P3指向P1，又称T轴；y轴方向是P3指向P2，又称B轴。</li>
+</ul>
+<h2 id="parallax-mapping"><a href="#parallax-mapping" class="headerlink" title="parallax mapping"></a>parallax mapping</h2><p><img src="./images/1603359412729.png" alt=""></p>
+<h3 id="key-point"><a href="#key-point" class="headerlink" title="key point"></a>key point</h3><p><strong>根据视线方向扰动纹理坐标(uv)</strong>使一个fragment的表面看起来比实际的更高或者更低，所有这些都根据观察方向和高度贴图。<br>eg.<br><img src="./images/1603359522217.png" alt=""><br>用B点的纹理坐标代替A点原本的纹理坐标。</p>
+<blockquote>
+<p>如何从点A得到点B的纹理坐标</p>
+</blockquote>
+<h3 id="details"><a href="#details" class="headerlink" title="details"></a>details</h3><ul>
+<li>basic realization<br><img src="./images/1603434287334.png" alt=""><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">vec2</span> ParallaxMapping(<span class="type">vec2</span> texCoords, <span class="type">vec3</span> viewDir)</span><br><span class="line">&#123; </span><br><span class="line">    <span class="type">float</span> height =  <span class="built_in">texture</span>(depthMap, texCoords).r;    </span><br><span class="line">    <span class="type">vec3</span> p = viewDir.xy / viewDir.z * (height * height_scale);</span><br><span class="line">    <span class="keyword">return</span> texCoords - p;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>better realization<ul>
+<li>Steep Parallax Mapping<br><img src="./images/1603434388078.png" alt=""><br>寻找更加接近的uv offset</li>
+<li>Parallax Occlusion Mapping<br>解决Steep Parallax Mapping的锯齿问题<br>两个最接近临点的插值</li>
+</ul>
+</li>
+</ul>
+<h2 id="bump-mapping"><a href="#bump-mapping" class="headerlink" title="bump mapping"></a>bump mapping</h2><p><img src="./images/1603436979292.png" alt=""></p>
+<h3 id="key-point-1"><a href="#key-point-1" class="headerlink" title="key point"></a>key point</h3><p>根据高度扰动法线</p>
+<h3 id="details-1"><a href="#details-1" class="headerlink" title="details"></a>details</h3><ul>
+<li>basic principle<br><img src="./images/1603436810326.png" alt=""><br>根据bump map中的height信息计算新的normal</li>
+<li>better realization —&gt; normal map</li>
+</ul>
+<h2 id="displacement-mapping"><a href="#displacement-mapping" class="headerlink" title="displacement mapping"></a>displacement mapping</h2><p><img src="./images/1603437189613.png" alt=""></p>
+<h3 id="key-point-2"><a href="#key-point-2" class="headerlink" title="key point"></a>key point</h3><p>using a (procedural-) texture- or height map to cause an effect where the <strong>actual geometric position of points over the textured surface are displaced</strong>, often along the local surface normal, according to the value the texture function evaluates to at each point on the surface.</p>
+<h3 id="detail"><a href="#detail" class="headerlink" title="detail"></a>detail</h3><p>vertex shader or geometry shader</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/10/23/more%20dimensional/" data-id="ckglxljhm0003kx0e83s92l9k" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-plan-2020-10-22" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/10/22/plan-2020-10-22/" class="article-date">
@@ -98,7 +166,10 @@
 <li><a href="chrome-extension://cdonnmffkdaoajfknoeeecmchibpmkmg/assets/pdf/web/viewer.html?file=https%3A%2F%2Fhal.inria.fr%2Fhal-01252637%2Ffile%2Fsiggraph15_sparkly.pdf">sig15 snow</a></li>
 </ul>
 <h2 id="realization"><a href="#realization" class="headerlink" title="realization"></a>realization</h2><ul>
-<li>parallax mapping</li>
+<li>parallax mapping<ul>
+<li><a href="https://learnopengl-cn.readthedocs.io/zh/latest/05%20Advanced%20Lighting/05%20Parallax%20Mapping/" target="_blank" rel="noopener">learnopengl base principle</a></li>
+</ul>
+</li>
 </ul>
 <h2 id="research"><a href="#research" class="headerlink" title="research"></a>research</h2><ul>
 <li>snow and rain</li>
@@ -118,7 +189,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/10/22/plan-2020-10-22/" data-id="ckgkmmszs0003gp0e6bl18f7d" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/10/22/plan-2020-10-22/" data-id="ckglxljhn0004kx0ebvz68osa" class="article-share-link">Share</a>
       
       
     </footer>
@@ -207,7 +278,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/13/many_lights_intro/" data-id="ckgkmmszl0000gp0e1sakc5wt" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/02/13/many_lights_intro/" data-id="ckglxljhf0000kx0egodx8j53" class="article-share-link">Share</a>
       
       
     </footer>
@@ -257,7 +328,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/13/motions/" data-id="ckgkmmszq0001gp0e5jve2zbl" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/02/13/motions/" data-id="ckglxljhj0001kx0ebqp802tb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -313,7 +384,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/13/plan_2020_10_14/" data-id="ckgkmmt060009gp0egtxb7zgk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/02/13/plan_2020_10_14/" data-id="ckglxlji0000ckx0e9v8i8tw0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -333,7 +404,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/motions/">motions</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/plan-tips/">plan tips</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/thousands-of-lights/">thousands of lights</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/motions/">motions</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/plan-tips/">plan tips</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/texture-mapping/">texture mapping</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/thousands-of-lights/">thousands of lights</a></li></ul>
     </div>
   </div>
 
@@ -359,6 +430,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/10/23/more%20dimensional/">more dimensional</a>
+          </li>
         
           <li>
             <a href="/2020/10/22/plan-2020-10-22/">plan_2020_10_22</a>
