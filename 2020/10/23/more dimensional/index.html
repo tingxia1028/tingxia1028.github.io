@@ -6,19 +6,30 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>2020.10.14 plans | 亭下</title>
+  <title>more dimensional | 亭下</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="courses thousands of point lights  paper Stormscapes: Simulating Cloud Dynamics in the Now  research snow   leave over MSAA and FXAA visual studio code template plugin  脑洞 cluster tiling通信的蜂窝六边形基站覆盖区域">
+  <meta name="description" content="如何只用2d的贴图，却能实现3d的“立体感”，parallax mapping, bump mapping, displacement mapping各是基于什么样的思路来实现的，能达到什么样的效果，有什么潜在的问题需要优化。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2020.10.14 plans">
-<meta property="og:url" content="http://yoursite.com/2020/02/13/plan_2020_10_14/index.html">
+<meta property="og:title" content="more dimensional">
+<meta property="og:url" content="http://yoursite.com/2020/10/23/more%20dimensional/index.html">
 <meta property="og:site_name" content="亭下">
-<meta property="og:description" content="courses thousands of point lights  paper Stormscapes: Simulating Cloud Dynamics in the Now  research snow   leave over MSAA and FXAA visual studio code template plugin  脑洞 cluster tiling通信的蜂窝六边形基站覆盖区域">
+<meta property="og:description" content="如何只用2d的贴图，却能实现3d的“立体感”，parallax mapping, bump mapping, displacement mapping各是基于什么样的思路来实现的，能达到什么样的效果，有什么潜在的问题需要优化。">
 <meta property="og:locale" content="zh">
-<meta property="article:published_time" content="2020-02-12T22:47:19.844Z">
-<meta property="article:modified_time" content="2020-10-15T06:21:27.455Z">
+<meta property="og:image" content="http://yoursite.com/images/1603418547481.png">
+<meta property="og:image" content="http://yoursite.com/images/1603434568282.png">
+<meta property="og:image" content="http://yoursite.com/images/1603434939023.png">
+<meta property="og:image" content="http://yoursite.com/images/1603359412729.png">
+<meta property="og:image" content="http://yoursite.com/images/1603359522217.png">
+<meta property="og:image" content="http://yoursite.com/images/1603434287334.png">
+<meta property="og:image" content="http://yoursite.com/images/1603434388078.png">
+<meta property="og:image" content="http://yoursite.com/images/1603436979292.png">
+<meta property="og:image" content="http://yoursite.com/images/1603436810326.png">
+<meta property="og:image" content="http://yoursite.com/images/1603437189613.png">
+<meta property="article:published_time" content="2020-10-23T07:03:00.000Z">
+<meta property="article:modified_time" content="2020-10-23T08:24:33.847Z">
 <meta property="article:author" content="亭下">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/1603418547481.png">
   
     <link rel="alternative" href="/atom.xml" title="亭下" type="application/atom+xml">
   
@@ -158,42 +169,54 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-plan_2020_10_14" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-more dimensional" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      2020.10.14 plans
+      more dimensional
     </h1>
   
 
         
-        <a href="/2020/02/13/plan_2020_10_14/" class="archive-article-date">
-  	<time datetime="2020-02-12T22:47:19.844Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-13</time>
+        <a href="/2020/10/23/more%20dimensional/" class="archive-article-date">
+  	<time datetime="2020-10-23T07:03:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="courses"><a href="#courses" class="headerlink" title="courses"></a>courses</h2><ul>
-<li><a href="https://newq.net/publications/more/sa2014-many-lights-course" target="_blank" rel="noopener">thousands of point lights</a></li>
+        <p>如何只用2d的贴图，却能实现3d的“立体感”，parallax mapping, bump mapping, displacement mapping各是基于什么样的思路来实现的，能达到什么样的效果，有什么潜在的问题需要优化。</p>
+<a id="more"></a>
+
+<h2 id="tangent-space"><a href="#tangent-space" class="headerlink" title="tangent space"></a>tangent space</h2><ul>
+<li>why need tangent space<br>使得不同朝向的表面可以使用同一个法线贴图。<br><img src="/images/1603418547481.png" alt=""></li>
+<li>how to solve it<br>在一个不同的坐标空间中进行光照，这个坐标空间里，法线贴图向量总是指向这个坐标空间的正z方向；所有的光照向量都相对与这个正z方向进行变换。这样我们就能始终使用同样的法线贴图，不管朝向问题。这个坐标空间叫做切线空间（tangent space）。</li>
+<li>uv mapping<br>3d surface unfolded in a single piece onto a 2D canvas  –&gt; keep the number of seams to a minimum<br>如何生成object的uv是另外一个比较大的topic，以后可以看看<br><a href="https://www.spiria.com/en/blog/desktop-software/understanding-uv-mapping-and-textures/" target="_blank" rel="noopener">https://www.spiria.com/en/blog/desktop-software/understanding-uv-mapping-and-textures/</a></li>
+<li>怎么想的把uv 和 3d的 TBN space 联系到一起的？<br><strong>每个mesh计算一个TBN空间，存储在顶点 —&gt;  关键点</strong><br>切线空间是相对于每一个顶点的，也就是说这个法线信息是基于每一个顶点的相对值，可以理解成是一种扰动。<br><img src="/images/1603434568282.png" alt=""><br>以每个triangle mesh为单位，以mesh的法线变换到tangent space为(0, 0, 1)为目标确定tangent space.<br><img src="/images/1603434939023.png" alt=""><br> 竖轴同样是面法向量，但是有多种不同的x和y轴组合，每种组合生成的点法向量是不一致的，所以需要规定一套固定的x和y轴，大家遵守同样的规则。怎么规定呢？就用纹理的uv坐标来定。具体做法是，取该点所在的三角形的三个顶点P1.P2.P3的纹理U和V坐标，然后x轴的方向就是P3指向P1，又称T轴；y轴方向是P3指向P2，又称B轴。</li>
 </ul>
-<h2 id="paper"><a href="#paper" class="headerlink" title="paper"></a>paper</h2><ul>
-<li><a href="http://computationalsciences.org/publications/haedrich-2020-stormscapes.html" target="_blank" rel="noopener">Stormscapes: Simulating Cloud Dynamics in the Now</a></li>
+<h2 id="parallax-mapping"><a href="#parallax-mapping" class="headerlink" title="parallax mapping"></a>parallax mapping</h2><p><img src="/images/1603359412729.png" alt=""></p>
+<h3 id="key-point"><a href="#key-point" class="headerlink" title="key point"></a>key point</h3><p><strong>根据视线方向扰动纹理坐标(uv)</strong>使一个fragment的表面看起来比实际的更高或者更低，所有这些都根据观察方向和高度贴图。<br>eg.<br><img src="/images/1603359522217.png" alt=""><br>用B点的纹理坐标代替A点原本的纹理坐标。<br>？？如何从点A得到点B的纹理坐标</p>
+<h3 id="details"><a href="#details" class="headerlink" title="details"></a>details</h3><ul>
+<li>basic realization<br><img src="/images/1603434287334.png" alt=""><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">vec2</span> ParallaxMapping(<span class="type">vec2</span> texCoords, <span class="type">vec3</span> viewDir)</span><br><span class="line">&#123; </span><br><span class="line">    <span class="type">float</span> height =  <span class="built_in">texture</span>(depthMap, texCoords).r;    </span><br><span class="line">    <span class="type">vec3</span> p = viewDir.xy / viewDir.z * (height * height_scale);</span><br><span class="line">    <span class="keyword">return</span> texCoords - p;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>better realization<ul>
+<li>Steep Parallax Mapping<br><img src="/images/1603434388078.png" alt=""><br>寻找更加接近的uv offset</li>
+<li>Parallax Occlusion Mapping<br>解决Steep Parallax Mapping的锯齿问题<br>两个最接近临点的插值</li>
 </ul>
-<h2 id="research"><a href="#research" class="headerlink" title="research"></a>research</h2><ul>
-<li>snow </li>
+</li>
 </ul>
-<h2 id="leave-over"><a href="#leave-over" class="headerlink" title="leave over"></a>leave over</h2><ul>
-<li>MSAA and FXAA</li>
-<li>visual studio code template plugin</li>
+<h2 id="bump-mapping"><a href="#bump-mapping" class="headerlink" title="bump mapping"></a>bump mapping</h2><p><img src="/images/1603436979292.png" alt=""></p>
+<h3 id="key-point-1"><a href="#key-point-1" class="headerlink" title="key point"></a>key point</h3><p>根据高度扰动法线</p>
+<h3 id="details-1"><a href="#details-1" class="headerlink" title="details"></a>details</h3><ul>
+<li>basic principle<br><img src="/images/1603436810326.png" alt=""><br>根据bump map中的height信息计算新的normal</li>
+<li>better realization —&gt; normal map</li>
 </ul>
-<h2 id="脑洞"><a href="#脑洞" class="headerlink" title="脑洞"></a>脑洞</h2><ul>
-<li>cluster tiling<br>通信的蜂窝六边形基站覆盖区域是一种比较好的2d空间分割方式<br>那有没有一种好的3d的空间分割方式，使得在寻找point light 和 spot light 覆盖的cluster的时候效率更高</li>
-</ul>
+<h2 id="displacement-mapping"><a href="#displacement-mapping" class="headerlink" title="displacement mapping"></a>displacement mapping</h2><p><img src="/images/1603437189613.png" alt=""></p>
+<h3 id="key-point-2"><a href="#key-point-2" class="headerlink" title="key point"></a>key point</h3><p>using a (procedural-) texture- or height map to cause an effect where the <strong>actual geometric position of points over the textured surface are displaced</strong>, often along the local surface normal, according to the value the texture function evaluates to at each point on the surface.</p>
+<h3 id="detail"><a href="#detail" class="headerlink" title="detail"></a>detail</h3><p>vertex shader or geometry shader</p>
 
       
 
@@ -229,7 +252,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/plan-tips//" class="article-tag-list-link color5">plan tips</a>
+        			<a href="/categories/texture-mapping//" class="article-tag-list-link color1">texture mapping</a>
         		</li>
       		
 		</ul>
@@ -284,7 +307,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/02/13/plan_2020_10_14/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/10/23/more%20dimensional/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -298,15 +321,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/02/13/motions/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          所有的路都不是白白经过的啊
-        
-      </div>
-    </a>
   
+    <a href="/2020/10/22/plan-2020-10-22/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">plan_2020_10_22</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
