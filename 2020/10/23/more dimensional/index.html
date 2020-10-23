@@ -7,12 +7,12 @@
   
   <title>more dimensional | 亭下</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="tangent space why need tangent space使得不同朝向的表面可以使用同一个法线贴图。 how to solve it在一个不同的坐标空间中进行光照，这个坐标空间里，法线贴图向量总是指向这个坐标空间的正z方向；所有的光照向量都相对与这个正z方向进行变换。这样我们就能始终使用同样的法线贴图，不管朝向问题。这个坐标空间叫做切线空间（tangent space）。 uv ma">
+  <meta name="description" content="如何只用2d的贴图，却能实现3d的“立体感”，parallax mapping, bump mapping, displacement mapping各是基于什么样的思路来实现的，能达到什么样的效果，有什么潜在的问题需要优化。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="more dimensional">
 <meta property="og:url" content="http://yoursite.com/2020/10/23/more%20dimensional/index.html">
 <meta property="og:site_name" content="亭下">
-<meta property="og:description" content="tangent space why need tangent space使得不同朝向的表面可以使用同一个法线贴图。 how to solve it在一个不同的坐标空间中进行光照，这个坐标空间里，法线贴图向量总是指向这个坐标空间的正z方向；所有的光照向量都相对与这个正z方向进行变换。这样我们就能始终使用同样的法线贴图，不管朝向问题。这个坐标空间叫做切线空间（tangent space）。 uv ma">
+<meta property="og:description" content="如何只用2d的贴图，却能实现3d的“立体感”，parallax mapping, bump mapping, displacement mapping各是基于什么样的思路来实现的，能达到什么样的效果，有什么潜在的问题需要优化。">
 <meta property="og:locale" content="zh">
 <meta property="og:image" content="http://yoursite.com/images/1603418547481.png">
 <meta property="og:image" content="http://yoursite.com/images/1603434568282.png">
@@ -25,7 +25,7 @@
 <meta property="og:image" content="http://yoursite.com/images/1603436810326.png">
 <meta property="og:image" content="http://yoursite.com/images/1603437189613.png">
 <meta property="article:published_time" content="2020-10-23T07:03:00.000Z">
-<meta property="article:modified_time" content="2020-10-23T07:36:57.719Z">
+<meta property="article:modified_time" content="2020-10-23T08:01:22.318Z">
 <meta property="article:author" content="Ting Xia">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/images/1603418547481.png">
@@ -107,7 +107,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="tangent-space"><a href="#tangent-space" class="headerlink" title="tangent space"></a>tangent space</h2><ul>
+        <p>如何只用2d的贴图，却能实现3d的“立体感”，parallax mapping, bump mapping, displacement mapping各是基于什么样的思路来实现的，能达到什么样的效果，有什么潜在的问题需要优化。</p>
+<a id="more"></a>
+
+<h2 id="tangent-space"><a href="#tangent-space" class="headerlink" title="tangent space"></a>tangent space</h2><ul>
 <li>why need tangent space<br>使得不同朝向的表面可以使用同一个法线贴图。<br><img src="/images/1603418547481.png" alt=""></li>
 <li>how to solve it<br>在一个不同的坐标空间中进行光照，这个坐标空间里，法线贴图向量总是指向这个坐标空间的正z方向；所有的光照向量都相对与这个正z方向进行变换。这样我们就能始终使用同样的法线贴图，不管朝向问题。这个坐标空间叫做切线空间（tangent space）。</li>
 <li>uv mapping<br>3d surface unfolded in a single piece onto a 2D canvas  –&gt; keep the number of seams to a minimum<br>如何生成object的uv是另外一个比较大的topic，以后可以看看<br><a href="https://www.spiria.com/en/blog/desktop-software/understanding-uv-mapping-and-textures/" target="_blank" rel="noopener">https://www.spiria.com/en/blog/desktop-software/understanding-uv-mapping-and-textures/</a></li>
@@ -136,7 +139,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/10/23/more%20dimensional/" data-id="ckgly4lyl0000tf0ec2zy6p2n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/10/23/more%20dimensional/" data-id="ckglyuh6d0000z80e8dns6o2x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -200,11 +203,11 @@
           </li>
         
           <li>
-            <a href="/2020/02/13/motions/">所有的路都不是白白经过的啊</a>
+            <a href="/2020/02/15/many_lights_intro/">thousands of lights(intro)</a>
           </li>
         
           <li>
-            <a href="/2020/02/13/many_lights_intro/">thousands of lights(intro)</a>
+            <a href="/2020/02/13/motions/">所有的路都不是白白经过的啊</a>
           </li>
         
           <li>
