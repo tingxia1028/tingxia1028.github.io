@@ -178,6 +178,121 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-20210314collection" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/14/20210314collection/">2021.03.14</a>
+    </h1>
+  
+
+        
+        <a href="/2021/03/14/20210314collection/" class="archive-article-date">
+  	<time datetime="2021-03-14T10:00:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="cascade-shadow"><a href="#cascade-shadow" class="headerlink" title="cascade shadow"></a>cascade shadow</h2><ul>
+<li>如何确定各个cascade的camera位置<ul>
+<li>找到每个cascade对应的frustum的八个corner</li>
+<li>根据8个corner计算frustum的center位置</li>
+<li>计算以center为球心，frustum的外接球radius</li>
+<li>确定对应camera的位置<br> center + light_dir * radius<br> 正交投影，投影window的长宽分别为 2 * radius</li>
+</ul>
+</li>
+<li>如何优化性能<br> 场景里的静态物数量很多，尤其是第四层，一方面是CPU端culling很费，另一方面GPU端draw call数目很多。目前做了一些小的降低draw call的措施：<ul>
+<li>第四层静态物只绘制超过一定体积的物体</li>
+<li>第四层动态物使用bounding sphere和instance的做法来绘制阴影</li>
+<li>第四层每隔8帧绘制一次<br>这里要注意depth map的clear时间以及计算shadow传入的camera</li>
+</ul>
+</li>
+<li>GPU driven rendering可以解决shadow draw call多的问题么</li>
+</ul>
+<h2 id="GAMES101-Advanced-Tops-in-Rendering"><a href="#GAMES101-Advanced-Tops-in-Rendering" class="headerlink" title="GAMES101 Advanced Tops in Rendering"></a>GAMES101 Advanced Tops in Rendering</h2><h3 id="Advanced-Light-Transport"><a href="#Advanced-Light-Transport" class="headerlink" title="Advanced Light Transport"></a>Advanced Light Transport</h3><ul>
+<li>Unbiased (无论样本多少，期望值等于真实值)<ul>
+<li>bidirectional path tracing (BDPT), 有时间实现一把</li>
+<li>Metropolis light transport (MLT)</li>
+</ul>
+</li>
+<li>Biased but consistent （样本数量无穷大，期望值会收敛到真实值）<ul>
+<li>photon mapping</li>
+<li>vertex connection and merging</li>
+</ul>
+</li>
+<li>instant radiosity (VPL)<h3 id="Advanced-Appearance-Modeling"><a href="#Advanced-Appearance-Modeling" class="headerlink" title="Advanced Appearance Modeling"></a>Advanced Appearance Modeling</h3></li>
+<li>Non-surface models<ul>
+<li>participating media</li>
+<li>hair/fur/fiber (BCSDF)</li>
+<li>granular material</li>
+</ul>
+</li>
+<li>surface model<ul>
+<li>translucent material (BSSRDF)</li>
+<li>detailed material</li>
+<li>wave optics （波动光学）</li>
+</ul>
+</li>
+<li>procedural appearance<br> 不真正生成贴图，要用的时候直接计算</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/collection//" class="article-tag-list-link color1">collection</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/14/20210314collection/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-20210307collections" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
