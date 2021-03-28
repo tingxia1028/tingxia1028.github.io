@@ -178,6 +178,96 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-20210328collection" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/28/20210328collection/">2021.03.28</a>
+    </h1>
+  
+
+        
+        <a href="/2021/03/28/20210328collection/" class="archive-article-date">
+  	<time datetime="2021-03-28T03:01:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="paper"><a href="#paper" class="headerlink" title="paper"></a>paper</h2><p><a href="chrome-extension://cdonnmffkdaoajfknoeeecmchibpmkmg/assets/pdf/web/viewer.html?file=http%3A%2F%2Fcseweb.ucsd.edu%2F~liw086%2Fdiff-sh-s20%2Fdiff-sh.pdf">Analytic Spherical Harmonic Gradients for Real-Time Rendering withMany Polygonal Area Lights</a></p>
+<ul>
+<li>从3维角度去看渲染方程，所以球谐函数可以很好的近似各个方向的lighting<br><img src="/2021/03/28/20210328collection/1616946480179.png" alt="Alt text"><br> <img src="/2021/03/28/20210328collection/1616946609212.png" alt="Alt text"></li>
+<li>把3维积分，降维到2维积分，最终降到一维积分找到解析解，也是蛮有意思的</li>
+</ul>
+<h2 id="GPU-driven-rendering"><a href="#GPU-driven-rendering" class="headerlink" title="GPU driven rendering"></a>GPU driven rendering</h2><ul>
+<li>难在cluster rendering 和 数据batching，改起来成本很大</li>
+<li>要实现一个通用的virtual texture 方案</li>
+</ul>
+<h2 id="games-202-lesson-3"><a href="#games-202-lesson-3" class="headerlink" title="games 202 lesson 3"></a>games 202 lesson 3</h2><ul>
+<li>shadow map的数学理论基础</li>
+</ul>
+<p>之前从来没想过为什么可以最后把visibility项乘到光照结果上。<br> <img src="/2021/03/28/20210328collection/1616844540559.png" alt="Alt text"><br> <img src="/2021/03/28/20210328collection/1616844522646.png" alt="Alt text"><br> <img src="/2021/03/28/20210328collection/1616844747200.png" alt="Alt text"><br>但是讲道理，底下还有个半球积分，应该除以2pi，GI的时候是这么算的么.</p>
+<ul>
+<li>PCSS(percentage closer soft shadows)<br> filter的size如何决定 — average blocker depth<br><img src="/2021/03/28/20210328collection/1616845869939.png" alt="Alt text"><br> <img src="/2021/03/28/20210328collection/1616846210082.png" alt="Alt text"><br>  <img src="/2021/03/28/20210328collection/1616846376797.png" alt="Alt text"><br>   这个性能消耗也太大了吧，且看下节课吧~</li>
+</ul>
+<h2 id="关于-引用-的-一个bug"><a href="#关于-引用-的-一个bug" class="headerlink" title="关于 引用 的 一个bug"></a>关于 引用 的 一个bug</h2><p>获取一个technique的context, 没有使用引用，导致函数结束临时变量的析构被调用，释放了对应的资源，constant buffer之类的巴拉巴拉，下次再进这个函数的时候，找不到对应的地址报了异常。<br>在设计代码的时候，如果需要获取的是原对象而不是拷贝，最好能够函数设计成返回指针，而不是引用，否则调用者在不清楚的情况下很可能赋值给一个非引用的临时变量。或者有什么好的检查机制，当调用函数是返回引用的时候能有个提醒。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/collection//" class="article-tag-list-link color1">collection</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/28/20210328collection/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-20200321collection" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
