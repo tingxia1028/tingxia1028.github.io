@@ -198,24 +198,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="paper"><a href="#paper" class="headerlink" title="paper"></a>paper</h2><p><a href="chrome-extension://cdonnmffkdaoajfknoeeecmchibpmkmg/assets/pdf/web/viewer.html?file=http%3A%2F%2Fcseweb.ucsd.edu%2F~liw086%2Fdiff-sh-s20%2Fdiff-sh.pdf">Analytic Spherical Harmonic Gradients for Real-Time Rendering withMany Polygonal Area Lights</a></p>
-<ul>
-<li>从3维角度去看渲染方程，所以球谐函数可以很好的近似各个方向的lighting<br>这里示例的是phong模型<br><img src="/2021/03/28/20210328collection/1616975330858.png" alt="Alt text"><br><img src="/2021/03/28/20210328collection/1616946480179.png" alt="Alt text"><br> <img src="/2021/03/28/20210328collection/1616946609212.png" alt="Alt text"></li>
-<li>把3维积分，降维到2维积分，最终降到一维积分找到解析解，也是蛮有意思的</li>
-</ul>
-<h2 id="GPU-driven-rendering"><a href="#GPU-driven-rendering" class="headerlink" title="GPU driven rendering"></a>GPU driven rendering</h2><ul>
-<li>难在cluster rendering 和 数据batching，改起来成本很大</li>
-<li>要实现一个通用的virtual texture 方案</li>
-</ul>
-<h2 id="games-202-lesson-3"><a href="#games-202-lesson-3" class="headerlink" title="games 202 lesson 3"></a>games 202 lesson 3</h2><ul>
-<li>shadow map的数学理论基础</li>
-</ul>
-<p>之前从来没想过为什么可以最后把visibility项乘到光照结果上。<br> <img src="/2021/03/28/20210328collection/1616844540559.png" alt="Alt text"><br> <img src="/2021/03/28/20210328collection/1616844522646.png" alt="Alt text"><br> <img src="/2021/03/28/20210328collection/1616844747200.png" alt="Alt text"><br>但是讲道理，底下还有个半球积分，应该除以2pi，GI的时候是这么算的么.</p>
-<ul>
-<li>PCSS(percentage closer soft shadows)<br> filter的size如何决定 — average blocker depth<br><img src="/2021/03/28/20210328collection/1616845869939.png" alt="Alt text"><br> <img src="/2021/03/28/20210328collection/1616846210082.png" alt="Alt text"><br>  <img src="/2021/03/28/20210328collection/1616846376797.png" alt="Alt text"><br>   这个性能消耗也太大了吧，且看下节课吧~</li>
-</ul>
-<h2 id="关于-引用-的-一个bug"><a href="#关于-引用-的-一个bug" class="headerlink" title="关于 引用 的 一个bug"></a>关于 引用 的 一个bug</h2><p>获取一个technique的context, 没有使用引用，导致函数结束临时变量的析构被调用，释放了对应的资源，constant buffer之类的巴拉巴拉，下次再进这个函数的时候，找不到对应的地址报了异常。<br>在设计代码的时候，如果需要获取的是原对象而不是拷贝，最好能够函数设计成返回指针，而不是引用，否则调用者在不清楚的情况下很可能赋值给一个非引用的临时变量。或者有什么好的检查机制，当调用函数是返回引用的时候能有个提醒。</p>
-
+        <p>Analytic Spherical Harmonic Gradients for Real-Time Rendering withMany Polygonal Area Lights</p>
+<p>GPU driven rendering</p>
+<p>games 202 lesson 3</p>
+<p>关于 引用 的 一个bug</p>
+        
+          <a class="article-more-a" href="/2021/03/28/20210328collection/#more">more >></a>
+        
       
 
       
@@ -288,35 +277,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="大气bug定位"><a href="#大气bug定位" class="headerlink" title="大气bug定位"></a>大气bug定位</h2><p>这周遇到一个低配置机器上大气算法切换导致崩溃的bug，由于内网没有相应的机器可以复现，外网机器调试起来效率十分低下，导致定位花了很长时间。最后关于multi-scattering的性能问题分析放到gitbook里了。<br>除了学习到一些问题定位方法外，最重要的是认识到全面有效的性能测试是多么重要，同志们！！一个feature能在高配机上跑起来不叫完成，验证在低配机上的性能及优化也很重要哇~</p>
-<h2 id="方法论问题"><a href="#方法论问题" class="headerlink" title="方法论问题"></a>方法论问题</h2><ul>
-<li><p>体积云调试<br>最近反思了一下，之前调试体积云存在的几个问题：</p>
-<ul>
-<li>中间也有调的比较好的效果，但是后来改吧改吧调参加改shader，想回到之前的效果无望</li>
-<li>控制变量没有做好，形态光照各种参数合在一起调试，通常调到最后自己和TA都晕了</li>
-<li>太过依赖现有的weather texture，想定制自己的很困难</li>
-</ul>
-<p>于是乎针对这些问题，想了想怎么样调试才可以更加高效：</p>
-<ul>
-<li>版本控制，每天抽出一点时间和TA调试，并且把参数和shader都copy成一个版本，简单记录下调了哪些参数，有什么效果，还有哪些问题</li>
-<li>先从一朵云调试起，即使得weather texture上只有一朵云，进而再调试形状，高度，密度，光照等等，然后锁死参数，在weather texture上由TA再绘制其他的云，这个时候尽量不要修改已经调试好的参数和算法。</li>
-<li>现在没有笔刷的工具，weather texture到引擎里的体积云过程还是太抽象，好的工具和算法实现同样重要。</li>
-</ul>
-</li>
-<li><p>GPU Driven Rendering<br> <img src="/2021/03/21/20200321collection/1616334939955.png" alt="Alt text"><br> 在开始实现任何一个feature之前，要把步骤和目标想清楚。</p>
-<ul>
-<li>整个feature我可以分成哪些阶段，每个阶段有哪些步骤</li>
-<li>对于复杂的feature，多阶段很重要。第一阶段我可以简单的实现出什么效果得到哪些验证，下一个阶段我可以扩展或者优化什么，最终阶段我要得到一个什么比较perfect的结果。</li>
-<li>每个步骤是在做什么，输入输出是什么，每一步的ground truth是什么（就是知道我每一步做的对不对十分重要）</li>
-</ul>
-</li>
-</ul>
-<h2 id="Google-Filament"><a href="#Google-Filament" class="headerlink" title="Google Filament"></a>Google Filament</h2><p><a target="_blank" rel="noopener" href="https://github.com/google/filament">https://github.com/google/filament</a></p>
-<ul>
-<li>完成本地mac端的编译，可以初步跑点demo</li>
-<li>Filament 的 官方文档是个很好的PBR教材</li>
-</ul>
-
+        <p>大气bug定位</p>
+<p>方法论问题  — 体积云和GPU driven的一些思考</p>
+<p>Google Filament</p>
+        
+          <a class="article-more-a" href="/2021/03/21/20200321collection/#more">more >></a>
+        
       
 
       
@@ -389,51 +355,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="cascade-shadow"><a href="#cascade-shadow" class="headerlink" title="cascade shadow"></a>cascade shadow</h2><ul>
-<li>如何确定各个cascade的camera位置<ul>
-<li>找到每个cascade对应的frustum的八个corner</li>
-<li>根据8个corner计算frustum的center位置</li>
-<li>计算以center为球心，frustum的外接球radius</li>
-<li>确定对应camera的位置<br> center + light_dir * radius<br> 正交投影，投影window的长宽分别为 2 * radius</li>
-</ul>
-</li>
-<li>如何优化性能<br> 场景里的静态物数量很多，尤其是第四层，一方面是CPU端culling很费，另一方面GPU端draw call数目很多。目前做了一些小的降低draw call的措施：<ul>
-<li>第四层静态物只绘制超过一定体积的物体</li>
-<li>第四层动态物使用bounding sphere和instance的做法来绘制阴影</li>
-<li>第四层每隔8帧绘制一次<br>这里要注意depth map的clear时间以及计算shadow传入的camera</li>
-</ul>
-</li>
-<li>GPU driven rendering可以解决shadow draw call多的问题么</li>
-</ul>
-<h2 id="GAMES101-Advanced-Tops-in-Rendering"><a href="#GAMES101-Advanced-Tops-in-Rendering" class="headerlink" title="GAMES101 Advanced Tops in Rendering"></a>GAMES101 Advanced Tops in Rendering</h2><h3 id="Advanced-Light-Transport"><a href="#Advanced-Light-Transport" class="headerlink" title="Advanced Light Transport"></a>Advanced Light Transport</h3><ul>
-<li>Unbiased (无论样本多少，期望值等于真实值)<ul>
-<li>bidirectional path tracing (BDPT), 有时间实现一把</li>
-<li>Metropolis light transport (MLT)</li>
-</ul>
-</li>
-<li>Biased but consistent （样本数量无穷大，期望值会收敛到真实值）<ul>
-<li>photon mapping</li>
-<li>vertex connection and merging</li>
-</ul>
-</li>
-<li>instant radiosity (VPL)</li>
-</ul>
-<h3 id="Advanced-Appearance-Modeling"><a href="#Advanced-Appearance-Modeling" class="headerlink" title="Advanced Appearance Modeling"></a>Advanced Appearance Modeling</h3><ul>
-<li>Non-surface models<ul>
-<li>participating media</li>
-<li>hair/fur/fiber (BCSDF)</li>
-<li>granular material</li>
-</ul>
-</li>
-<li>surface model<ul>
-<li>translucent material (BSSRDF)</li>
-<li>detailed material</li>
-<li>wave optics （波动光学）</li>
-</ul>
-</li>
-<li>procedural appearance<br> 不真正生成贴图，要用的时候直接计算</li>
-</ul>
-
+        <p>cascade shadow</p>
+<p>GAMES101 Advanced Tops in Rendering</p>
+        
+          <a class="article-more-a" href="/2021/03/14/20210314collection/#more">more >></a>
+        
       
 
       
@@ -506,17 +432,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="texture-compression"><a href="#texture-compression" class="headerlink" title="texture compression"></a>texture compression</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/237940807">https://zhuanlan.zhihu.com/p/237940807</a><br>我们需要一种内存占用既小又能被GPU读取的格式——压缩纹理格式。<br>纹理压缩对应的算法是以某种形式的<strong>固定速率有损向量量化</strong>(lossy vector quantization )将固定大小的像素块编码进固定大小的字节块中。<br><img src="/2021/03/07/20210307collections/1615127127938.png" alt="Alt text"></p>
-<h2 id="shadow-性能优化"><a href="#shadow-性能优化" class="headerlink" title="shadow 性能优化"></a>shadow 性能优化</h2><ul>
-<li>对第四层cascade shadow增加体积过滤，小于一定体积的静态物体不绘制阴影</li>
-<li>第四层cascade shadow隔8帧更新一次有一个bug，是其余7帧使用的应该是第1帧的相机位置</li>
-</ul>
-<h2 id="spot-light-shadow"><a href="#spot-light-shadow" class="headerlink" title="spot light shadow"></a>spot light shadow</h2><ul>
-<li>我们的spot light的角度限制在180度以内，所以用一张2d texture绘制depth即可</li>
-<li>spot light的attenuation还要再调研看看</li>
-</ul>
-<h2 id="point-light-attenuation"><a href="#point-light-attenuation" class="headerlink" title="point light attenuation"></a>point light attenuation</h2><p><a href="chrome-extension://cdonnmffkdaoajfknoeeecmchibpmkmg/assets/pdf/web/viewer.html?file=http%3A%2F%2Fwww.cemyuksel.com%2Fresearch%2Fpointlightattenuation%2Fpointlightattenuation.pdf">Point Light Attenuation Without Singularity</a><br><img src="/2021/03/07/20210307collections/1615127493260.png" alt="Alt text"><br>实现了基于这篇paper的衰减函数，效果基本和之前的没有什么差别，而且减少了radius是否=0的if判断。</p>
-
+        <p>texture compression</p>
+<p>shadow 性能优化</p>
+<p>point light attenuation</p>
+        
+          <a class="article-more-a" href="/2021/03/07/20210307collections/#more">more >></a>
+        
       
 
       

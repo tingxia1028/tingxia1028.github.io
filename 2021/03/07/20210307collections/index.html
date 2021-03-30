@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>2021.03.07 | 亭下</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="texture compressionhttps:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;237940807我们需要一种内存占用既小又能被GPU读取的格式——压缩纹理格式。纹理压缩对应的算法是以某种形式的固定速率有损向量量化(lossy vector quantization )将固定大小的像素块编码进固定大小的字节块中。 shadow 性能优化 对第四层cascade shadow增加体积">
+  <meta name="description" content="texture compression shadow 性能优化 point light attenuation">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2021.03.07">
 <meta property="og:url" content="http://example.com/2021/03/07/20210307collections/index.html">
 <meta property="og:site_name" content="亭下">
-<meta property="og:description" content="texture compressionhttps:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;237940807我们需要一种内存占用既小又能被GPU读取的格式——压缩纹理格式。纹理压缩对应的算法是以某种形式的固定速率有损向量量化(lossy vector quantization )将固定大小的像素块编码进固定大小的字节块中。 shadow 性能优化 对第四层cascade shadow增加体积">
+<meta property="og:description" content="texture compression shadow 性能优化 point light attenuation">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2021/03/07/20210307collections/1615127127938.png">
 <meta property="og:image" content="http://example.com/2021/03/07/20210307collections/1615127493260.png">
 <meta property="article:published_time" content="2021-03-07T14:21:38.000Z">
-<meta property="article:modified_time" content="2021-03-07T14:35:02.285Z">
+<meta property="article:modified_time" content="2021-03-30T13:42:09.909Z">
 <meta property="article:author" content="ting.xia">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2021/03/07/20210307collections/1615127127938.png">
@@ -201,7 +201,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="texture-compression"><a href="#texture-compression" class="headerlink" title="texture compression"></a>texture compression</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/237940807">https://zhuanlan.zhihu.com/p/237940807</a><br>我们需要一种内存占用既小又能被GPU读取的格式——压缩纹理格式。<br>纹理压缩对应的算法是以某种形式的<strong>固定速率有损向量量化</strong>(lossy vector quantization )将固定大小的像素块编码进固定大小的字节块中。<br><img src="/2021/03/07/20210307collections/1615127127938.png" alt="Alt text"></p>
+        <p>texture compression</p>
+<p>shadow 性能优化</p>
+<p>point light attenuation</p>
+<span id="more"></span>
+
+<h2 id="texture-compression"><a href="#texture-compression" class="headerlink" title="texture compression"></a>texture compression</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/237940807">https://zhuanlan.zhihu.com/p/237940807</a><br>我们需要一种内存占用既小又能被GPU读取的格式——压缩纹理格式。<br>纹理压缩对应的算法是以某种形式的<strong>固定速率有损向量量化</strong>(lossy vector quantization )将固定大小的像素块编码进固定大小的字节块中。<br><img src="/2021/03/07/20210307collections/1615127127938.png" alt="Alt text"></p>
 <h2 id="shadow-性能优化"><a href="#shadow-性能优化" class="headerlink" title="shadow 性能优化"></a>shadow 性能优化</h2><ul>
 <li>对第四层cascade shadow增加体积过滤，小于一定体积的静态物体不绘制阴影</li>
 <li>第四层cascade shadow隔8帧更新一次有一个bug，是其余7帧使用的应该是第1帧的相机位置</li>
