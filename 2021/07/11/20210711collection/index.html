@@ -6,15 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2021 | 亭下</title>
+  <title>2021.07.11 | 亭下</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="刚柔并济 安适如常">
-<meta property="og:type" content="website">
-<meta property="og:title" content="亭下">
-<meta property="og:url" content="http://example.com/archives/2021/index.html">
+  <meta name="description" content="Monte Carlo Integration deep thoughts so many bugs 主动推动">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2021.07.11">
+<meta property="og:url" content="http://example.com/2021/07/11/20210711collection/index.html">
 <meta property="og:site_name" content="亭下">
-<meta property="og:description" content="刚柔并济 安适如常">
+<meta property="og:description" content="Monte Carlo Integration deep thoughts so many bugs 主动推动">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-07-11T14:47:05.000Z">
+<meta property="article:modified_time" content="2021-07-26T04:21:00.742Z">
 <meta property="article:author" content="ting.xia">
 <meta name="twitter:card" content="summary">
   
@@ -176,75 +178,61 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-20210711collection" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/07/25/20210725collection/" class="archive-article-date">
-  	<time datetime="2021-07-25T14:47:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-25</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/25/20210725collection/">2021.07.25</a>
+    <h1 class="article-title" itemprop="name">
+      2021.07.11
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/collection//" class="article-tag-list-link color1">collection</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/07/11/20210711collection/" class="archive-article-date">
+        
+        <a href="/2021/07/11/20210711collection/" class="archive-article-date">
   	<time datetime="2021-07-11T14:47:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-11</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/11/20210711collection/">2021.07.11</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><a href="#monte-carlo-integration-deep-thoughts">Monte Carlo Integration deep thoughts</a></li>
+<li><a href="#so-many-bugs">so many bugs</a></li>
+<li><a href="#%E4%B8%BB%E5%8A%A8%E6%8E%A8%E5%8A%A8">主动推动</a></li>
+</ul>
+<span id="more"></span>
 
-        <div class="article-info info-on-right">
-          
-          
+<h2 id="Monte-Carlo-Integration-deep-thoughts"><a href="#Monte-Carlo-Integration-deep-thoughts" class="headerlink" title="Monte Carlo Integration deep thoughts"></a>Monte Carlo Integration deep thoughts</h2><ul>
+<li>Monte Carlo</li>
+<li>unbias  vs bias<br>最近调研SSR，又涉及到了Monte Carlo Integration，发现之前关于这方面的知识其实掌握的很模棱两可，并没有真的理解里面的实质，找了一些资料和书籍，发现还是physically based rendering这本书关于Monte Carlo讲的比较有说服力，学习了下，之后会整理到gitbook上。才发觉之前在学数学的时候，并没有真切的有解决问题的代入感，所以知识只是学了浅浅的表象，理解了这些知识是在针对什么样的问题得出的解决方案的时候，才会有更深的领悟。</li>
+</ul>
+<h2 id="so-many-bugs"><a href="#so-many-bugs" class="headerlink" title="so many bugs"></a>so many bugs</h2><p>It likes a ecosystem, everything even a small one, is part of the whole, has a variety of links between each other.</p>
+<ul>
+<li>cloud vs atmosphere</li>
+<li>atmosphere with dynamic time and weather</li>
+<li>atmosphere with particle, hair and so many other things</li>
+<li>performance</li>
+<li>edge case</li>
+<li>different hardwares<br>不得不承认，一个赛季同时上线3个大feature真的是给自己找罪受。不过也验证了我之前对于这些feature粗浅的认知，欠缺的自测和盲目的自信。单说体积云和新的大气雾效，就让我领悟了这就是个真实的生态系统，你的大气会影响云，粒子，毛发，还需要和云一起和动态日夜、天气联动。除此之外还要考虑各种边界情况，比如计算大气时，海拔是负值会有什么影响。当然还有性能的考虑，不同显卡适配的情况等等。不得不说，我低估了这其中的复杂度，也在亲身被现实打脸之后获得了该有的谦卑和恭敬。</li>
+</ul>
+<h2 id="主动推动"><a href="#主动推动" class="headerlink" title="主动推动"></a>主动推动</h2><p>其实这个赛季上线造成自己压力山大的另外一个问题，是自己拖延了和美术真正的交接时间。啥叫真正的交接时间呢，就是我之前已经和TA同学交接过一遍体积云和大气的调参方式以及初版效果，就以为这之后就可以全权交给TA再和美术对接。谁知道临上线美术开始调效果了之后才暴露了一堆问题。开始的时候我也抱怨了这条链路上的一些问题，但是仔细的想了想，既然我是feature的creator，那我就需要盯紧整条链路上的各个环节，直到整个feature完美落地上线。工作中并不缺少的是抱怨者，而是问题的解决和推动人，工作了这些年，也许这才是最应该学习的地方。<br>想起国富论的第一章节就说的是分工，分工合作能提高效率和产能这个道理看起来很简单，但是在实际工作中要做到还是有些难的，如何能让每个人尽量的各司其职让自己的效率最大化是个需要不断探索和演化的过程。这次上线前我觉得缺少的两个环节上的分工就是：</p>
+<ul>
+<li>专业的图形测试<br>这个我不知道其他公司有没有，我们是没有的。其实图形测试是需要功力的，每个pass的输入输出验证，不是简单的肉眼分辨就可以的，针对不同机器配置的兼容性和性能测试，不同场景的针对性测试等等都是需要一定的专业知识。如果补齐了这个角色，可以减轻图形开发的压力，尽早的发现和解决问题。</li>
+<li>专业的TA<br>这个貌似在国内是个比较难的事情，又要懂点技术又要懂美术，给了一个新的feature，需要能够自己钻研调出一些好的效果，界定哪些参数是必须且能够直观的呈现给美术，找到当前的效果还有哪些问题和程序一起优化，得到一个可以用操作的版本后负责和美术沟通，推动feature的落地。这样描述下来，深深地感慨我们组要是有个这样的大佬该多好，就不用自己孤军奋斗了呀。难呀~</li>
+</ul>
+<p>万事还是要先做好自己，其实大部分人并不是傻子看不到问题，但是真正站出来解决问题的才是被需要的那个人。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -257,324 +245,125 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/07/11/20210711collection/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/07/04/20210704collection/" class="archive-article-date">
-  	<time datetime="2021-07-04T14:47:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-04</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2021/07/25/20210725collection/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          2021.07.25
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/04/20210704collection/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2021.07.04</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/04/20210704collection/">2021.07.04</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/collection//" class="article-tag-list-link color1">collection</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Monte-Carlo-Integration-deep-thoughts"><span class="toc-number">1.</span> <span class="toc-text">Monte Carlo Integration deep thoughts</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#so-many-bugs"><span class="toc-number">2.</span> <span class="toc-text">so many bugs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E5%8A%A8%E6%8E%A8%E5%8A%A8"><span class="toc-number">3.</span> <span class="toc-text">主动推动</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/06/20/20210620collection/" class="archive-article-date">
-  	<time datetime="2021-06-20T14:47:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/06/20/20210620collection/">2021.06.20</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/collection//" class="article-tag-list-link color1">collection</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/06/13/20210613collection/" class="archive-article-date">
-  	<time datetime="2021-06-13T14:47:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-13</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/06/13/20210613collection/">2021.06.13</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/collection//" class="article-tag-list-link color1">collection</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/06/06/20210606collection/" class="archive-article-date">
-  	<time datetime="2021-06-06T14:47:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/06/06/20210606collection/">2021.06.06</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/collection//" class="article-tag-list-link color1">collection</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/05/30/20210530collection/" class="archive-article-date">
-  	<time datetime="2021-05-30T14:47:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/30/20210530collection/">2021.05.30</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/collection//" class="article-tag-list-link color1">collection</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/05/23/20210523collection/" class="archive-article-date">
-  	<time datetime="2021-05-23T14:00:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/23/20210523collection/">2021.05.23</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/collection//" class="article-tag-list-link color1">collection</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/05/16/20210516collection/" class="archive-article-date">
-  	<time datetime="2021-05-16T14:00:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/16/20210516collection/">2021.05.16</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/collection//" class="article-tag-list-link color1">collection</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/30/20210430collection/" class="archive-article-date">
-  	<time datetime="2021-04-30T14:47:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/30/20210430collection/">2021.04.30</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/collection//" class="article-tag-list-link color1">collection</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2021/page/2/">2</a><a class="extend next" rel="next" href="/archives/2021/page/2/">Next &amp;raquo;</a>
-    </nav>
   
 
 
@@ -598,8 +387,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
