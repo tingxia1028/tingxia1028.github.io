@@ -6,19 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>标签 | 亭下</title>
+  <title>2021.08.08 | 亭下</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="刚柔并济 安适如常">
-<meta property="og:type" content="website">
-<meta property="og:title" content="标签">
-<meta property="og:url" content="http://example.com/tags/index.html">
+  <meta name="description" content="blue noise dithered sampling cloud per_frame_time.x 随着游戏时间变长，云变的越来越快且会有跳变 地形 back face culling 计算 cascade shadow 时被忽略，导致漏光">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2021.08.08">
+<meta property="og:url" content="http://example.com/2021/08/08/20210808collection/index.html">
 <meta property="og:site_name" content="亭下">
-<meta property="og:description" content="刚柔并济 安适如常">
+<meta property="og:description" content="blue noise dithered sampling cloud per_frame_time.x 随着游戏时间变长，云变的越来越快且会有跳变 地形 back face culling 计算 cascade shadow 时被忽略，导致漏光">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-10-10T04:21:48.000Z">
-<meta property="article:modified_time" content="2021-03-07T03:25:03.862Z">
+<meta property="og:image" content="http://example.com/2021/08/08/20210808collection/1643942804812.png">
+<meta property="article:published_time" content="2021-08-08T14:47:05.000Z">
+<meta property="article:modified_time" content="2022-02-04T02:51:39.423Z">
 <meta property="article:author" content="ting.xia">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/08/08/20210808collection/1643942804812.png">
   
     <link rel="alternative" href="/atom.xml" title="亭下" type="application/atom+xml">
   
@@ -178,27 +180,37 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="page-" class="article article-type-page " itemscope itemprop="blogPost">
+            <article id="post-20210808collection" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      标签
+      2021.08.08
     </h1>
   
 
         
-        <a href="/tags/index.html" class="archive-article-date">
-  	<time datetime="2020-10-10T04:21:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-10</time>
+        <a href="/2021/08/08/20210808collection/" class="archive-article-date">
+  	<time datetime="2021-08-08T14:47:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-08</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <ul>
+<li><a href="#blue-noise-dithered-sampling">blue noise dithered sampling</a></li>
+<li><a href="#cloud-per_frame_timex-%E9%9A%8F%E7%9D%80%E6%B8%B8%E6%88%8F%E6%97%B6%E9%97%B4%E5%8F%98%E9%95%BF%E4%BA%91%E5%8F%98%E7%9A%84%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%BF%AB%E4%B8%94%E4%BC%9A%E6%9C%89%E8%B7%B3%E5%8F%98">cloud per_frame_time.x 随着游戏时间变长，云变的越来越快且会有跳变</a></li>
+<li><a href="#%E5%9C%B0%E5%BD%A2-back-face-culling-%E8%AE%A1%E7%AE%97-cascade-shadow-%E6%97%B6%E8%A2%AB%E5%BF%BD%E7%95%A5%E5%AF%BC%E8%87%B4%E6%BC%8F%E5%85%89">地形 back face culling 计算 cascade shadow 时被忽略，导致漏光</a></li>
+</ul>
+<span id="more"></span>
+
+<h2 id="blue-noise-dithered-sampling"><a href="#blue-noise-dithered-sampling" class="headerlink" title="blue noise dithered sampling"></a>blue noise dithered sampling</h2><p><a target="_blank" rel="noopener" href="https://www.solidangle.com/research/dither_abstract.pdf">https://www.solidangle.com/research/dither_abstract.pdf</a><br><a target="_blank" rel="noopener" href="https://github.com/bartwronski/BlueNoiseGenerator/">https://github.com/bartwronski/BlueNoiseGenerator/</a></p>
+<h2 id="cloud-per-frame-time-x-随着游戏时间变长，云变的越来越快且会有跳变"><a href="#cloud-per-frame-time-x-随着游戏时间变长，云变的越来越快且会有跳变" class="headerlink" title="cloud per_frame_time.x 随着游戏时间变长，云变的越来越快且会有跳变"></a>cloud per_frame_time.x 随着游戏时间变长，云变的越来越快且会有跳变</h2><p>因为这个时间是随着游戏时间不断变长的，如果在一个关卡时间过长，这个值就会越来越大，再用这个时间去采样贴图效果就会变得不可控，所以要用一个cos函数把值域控制在一个合理的范围内且保证变化的连续。<br><img src="/2021/08/08/20210808collection/1643942804812.png" alt="Alt text"></p>
+<h2 id="地形-back-face-culling-计算-cascade-shadow-时被忽略，导致漏光"><a href="#地形-back-face-culling-计算-cascade-shadow-时被忽略，导致漏光" class="headerlink" title="地形 back face culling 计算 cascade shadow 时被忽略，导致漏光"></a>地形 back face culling 计算 cascade shadow 时被忽略，导致漏光</h2><p>山地地形有一些不封闭的静态物山体壳贴在地形上，当太阳角度在接近地平线的位置时，因为back face culling被裁减掉，绘制阴影的depth时没有算进深度，导致漏光。现在采取的措施是让美术用一个面片数尽可能少的面把这些不封闭的壳封上。</p>
+
       
 
       
@@ -207,6 +219,17 @@
       
       
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/collection//" class="article-tag-list-link color1">collection</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -256,7 +279,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/tags/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/08/08/20210808collection/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -268,6 +291,25 @@
 </article>
 
   
+<nav id="article-nav">
+  
+    <a href="/2021/08/16/20210816collection/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          2021.08.16
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/08/01/20210801collection/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2021.08.01</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -289,7 +331,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#blue-noise-dithered-sampling"><span class="toc-number">1.</span> <span class="toc-text">blue noise dithered sampling</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cloud-per-frame-time-x-%E9%9A%8F%E7%9D%80%E6%B8%B8%E6%88%8F%E6%97%B6%E9%97%B4%E5%8F%98%E9%95%BF%EF%BC%8C%E4%BA%91%E5%8F%98%E7%9A%84%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%BF%AB%E4%B8%94%E4%BC%9A%E6%9C%89%E8%B7%B3%E5%8F%98"><span class="toc-number">2.</span> <span class="toc-text">cloud per_frame_time.x 随着游戏时间变长，云变的越来越快且会有跳变</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%B0%E5%BD%A2-back-face-culling-%E8%AE%A1%E7%AE%97-cascade-shadow-%E6%97%B6%E8%A2%AB%E5%BF%BD%E7%95%A5%EF%BC%8C%E5%AF%BC%E8%87%B4%E6%BC%8F%E5%85%89"><span class="toc-number">3.</span> <span class="toc-text">地形 back face culling 计算 cascade shadow 时被忽略，导致漏光</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -331,7 +373,7 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

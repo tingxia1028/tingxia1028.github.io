@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>标签 | 亭下</title>
+  <title>2021.08.16 | 亭下</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="刚柔并济 安适如常">
-<meta property="og:type" content="website">
-<meta property="og:title" content="标签">
-<meta property="og:url" content="http://example.com/tags/index.html">
+  <meta name="description" content="TAA jitter 的 作用 SIGGRAPH 2021 course 之 对马岛 一个疑惑">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2021.08.16">
+<meta property="og:url" content="http://example.com/2021/08/16/20210816collection/index.html">
 <meta property="og:site_name" content="亭下">
-<meta property="og:description" content="刚柔并济 安适如常">
+<meta property="og:description" content="TAA jitter 的 作用 SIGGRAPH 2021 course 之 对马岛 一个疑惑">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-10-10T04:21:48.000Z">
-<meta property="article:modified_time" content="2021-03-07T03:25:03.862Z">
+<meta property="article:published_time" content="2021-08-16T14:47:05.000Z">
+<meta property="article:modified_time" content="2022-02-04T03:17:36.380Z">
 <meta property="article:author" content="ting.xia">
 <meta name="twitter:card" content="summary">
   
@@ -178,27 +178,65 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="page-" class="article article-type-page " itemscope itemprop="blogPost">
+            <article id="post-20210816collection" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      标签
+      2021.08.16
     </h1>
   
 
         
-        <a href="/tags/index.html" class="archive-article-date">
-  	<time datetime="2020-10-10T04:21:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-10</time>
+        <a href="/2021/08/16/20210816collection/" class="archive-article-date">
+  	<time datetime="2021-08-16T14:47:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-16</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <ul>
+<li><a href="#taa">TAA</a></li>
+<li><a href="#jitter-%E7%9A%84-%E4%BD%9C%E7%94%A8">jitter 的 作用</a></li>
+<li><a href="#siggraph-2021-course-%E4%B9%8B-%E5%AF%B9%E9%A9%AC%E5%B2%9B">SIGGRAPH 2021 course 之 对马岛</a></li>
+<li><a href="#%E4%B8%80%E4%B8%AA%E7%96%91%E6%83%91">一个疑惑</a></li>
+</ul>
+<span id="more"></span>
+
+
+<h2 id="TAA"><a href="#TAA" class="headerlink" title="TAA"></a>TAA</h2><ul>
+<li>talk<ul>
+<li><a target="_blank" rel="noopener" href="https://research.activision.com/publications/2020-03/dynamic-temporal-antialiasing-and-upsampling-in-call-of-duty">Dynamic Temporal Antialiasing in Call of Duty: Inﬁnite Warfare</a></li>
+<li><a target="_blank" rel="noopener" href="http://advances.realtimerendering.com/s2016/">Temporal Antialiasing in Uncharted 4</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.google.com/viewer?url=http://twvideo01.ubm-us.net/o1/vault/gdc2016/Presentations/Pedersen_LasseJonFuglsang_TemporalReprojectionAntiAliasing.pdf">16 Inside GDC</a></li>
+<li><a target="_blank" rel="noopener" href="http://advances.realtimerendering.com/s2014/#_HIGH-QUALITY_TEMPORAL_SUPERSAMPLING">14 Unreal</a></li>
+</ul>
+</li>
+<li>implementation<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/playdeadgames/temporal">https://github.com/playdeadgames/temporal</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/h3r2tic/rtoy-samples/blob/master/assets/shaders/taa.glsl">https://github.com/h3r2tic/rtoy-samples/blob/master/assets/shaders/taa.glsl</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Unity-Technologies/Graphics/blob/master/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/TemporalAntialiasing.hlsl">https://github.com/Unity-Technologies/Graphics/blob/master/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/TemporalAntialiasing.hlsl</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/TheRealMJP/MSAAFilter/blob/master/MSAAFilter/Resolve.hlsl">https://github.com/TheRealMJP/MSAAFilter/blob/master/MSAAFilter/Resolve.hlsl</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/turanszkij/WickedEngine/blob/master/WickedEngine/shaders/temporalaaCS.hlsl">https://github.com/turanszkij/WickedEngine/blob/master/WickedEngine/shaders/temporalaaCS.hlsl</a></li>
+<li><a target="_blank" rel="noopener" href="https://gist.github.com/Erkaman/f24ef6bd7499be363e6c99d116d8734d">https://gist.github.com/Erkaman/f24ef6bd7499be363e6c99d116d8734d</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/GameTechDev/TAA/blob/main/MiniEngine/Core/Shaders/TAAResolve.hlsl">https://github.com/GameTechDev/TAA/blob/main/MiniEngine/Core/Shaders/TAAResolve.hlsl</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/PanosK92/SpartanEngine/blob/master/Data/shaders/temporal_antialiasing.hlsl">https://github.com/PanosK92/SpartanEngine/blob/master/Data/shaders/temporal_antialiasing.hlsl</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/NVIDIA/Q2RTX/blob/master/src/refresh/vkpt/shader/asvgf_taau.comp">https://github.com/NVIDIA/Q2RTX/blob/master/src/refresh/vkpt/shader/asvgf_taau.comp</a></li>
+<li><a target="_blank" rel="noopener" href="https://ziyadbarakat.wordpress.com/2020/07/28/temporal-anti-aliasing-step-by-step/">https://ziyadbarakat.wordpress.com/2020/07/28/temporal-anti-aliasing-step-by-step/</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="jitter-的-作用"><a href="#jitter-的-作用" class="headerlink" title="jitter 的 作用"></a>jitter 的 作用</h2><p>增加样本的多样性。</p>
+<ul>
+<li>TAA中每一帧在一个pixel内采用不同的采样点</li>
+<li>ray marching 或者 tracing的时候每次trace对起点做一定的扰动</li>
+</ul>
+<h2 id="SIGGRAPH-2021-course-之-对马岛"><a href="#SIGGRAPH-2021-course-之-对马岛" class="headerlink" title="SIGGRAPH 2021 course 之 对马岛"></a>SIGGRAPH 2021 course 之 对马岛</h2><p>Lighting, Atmosphere, and Tonemapping<br><a target="_blank" rel="noopener" href="https://advances.realtimerendering.com/s2021/jpatry_advances2021/index.html">https://advances.realtimerendering.com/s2021/jpatry_advances2021/index.html</a><br>能看到对于现有系统和实现的不断优化和改进。</p>
+<h2 id="一个疑惑"><a href="#一个疑惑" class="headerlink" title="一个疑惑"></a>一个疑惑</h2><p>怎么样知道能量是否守恒 ？</p>
+
       
 
       
@@ -207,6 +245,17 @@
       
       
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/collection//" class="article-tag-list-link color1">collection</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -256,7 +305,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/tags/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/08/16/20210816collection/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -268,6 +317,25 @@
 </article>
 
   
+<nav id="article-nav">
+  
+    <a href="/2021/08/29/20210829collection/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          2021.08.29
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/08/08/20210808collection/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2021.08.08</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -289,7 +357,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#TAA"><span class="toc-number">1.</span> <span class="toc-text">TAA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jitter-%E7%9A%84-%E4%BD%9C%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">jitter 的 作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SIGGRAPH-2021-course-%E4%B9%8B-%E5%AF%B9%E9%A9%AC%E5%B2%9B"><span class="toc-number">3.</span> <span class="toc-text">SIGGRAPH 2021 course 之 对马岛</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E7%96%91%E6%83%91"><span class="toc-number">4.</span> <span class="toc-text">一个疑惑</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -331,7 +399,7 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
