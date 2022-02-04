@@ -6,21 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>2021.08.29 | 亭下</title>
+  <title>Category: collection | 亭下</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="perspective correct interpolation compute shader thread count">
-<meta property="og:type" content="article">
-<meta property="og:title" content="2021.08.29">
-<meta property="og:url" content="http://example.com/2021/08/29/20210829collection/index.html">
+  <meta name="description" content="刚柔并济 安适如常">
+<meta property="og:type" content="website">
+<meta property="og:title" content="亭下">
+<meta property="og:url" content="http://example.com/categories/collection/page/3/index.html">
 <meta property="og:site_name" content="亭下">
-<meta property="og:description" content="perspective correct interpolation compute shader thread count">
+<meta property="og:description" content="刚柔并济 安适如常">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2021/08/29/20210829collection/1631440892935.png">
-<meta property="article:published_time" content="2021-08-29T14:47:05.000Z">
-<meta property="article:modified_time" content="2022-02-04T03:14:32.525Z">
 <meta property="article:author" content="ting.xia">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/08/29/20210829collection/1631440892935.png">
   
     <link rel="alternative" href="/atom.xml" title="亭下" type="application/atom+xml">
   
@@ -180,47 +176,37 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-20210829collection" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      2021.08.29
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2021" class="archive-year">2021</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2021/03/28/20210328collection/" class="archive-article-date">
+  	<time datetime="2021-03-28T03:01:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-28</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2021/03/28/20210328collection/">2021.03.28</a>
     </h1>
   
 
-        
-        <a href="/2021/08/29/20210829collection/" class="archive-article-date">
-  	<time datetime="2021-08-29T14:47:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li><a href="#perspective-correct-interpolation">perspective correct interpolation</a></li>
-<li><a href="#compute-shader-thread-count">compute shader thread count</a></li>
-</ul>
-<span id="more"></span>
-
-<h2 id="perspective-correct-interpolation"><a href="#perspective-correct-interpolation" class="headerlink" title="perspective correct interpolation"></a>perspective correct interpolation</h2><p>chrome-extension://cdonnmffkdaoajfknoeeecmchibpmkmg/assets/pdf/web/viewer.html?file=https%3A%2F%2F<a href="http://www.comp.nus.edu.sg%2F~lowkl%2Fpublications%2Flowk_persp_interp_techrep.pdf">www.comp.nus.edu.sg%2F~lowkl%2Fpublications%2Flowk_persp_interp_techrep.pdf</a></p>
-<p>在做SSGI的时候，关于screen space 和 view space 下的插值换算需要搞搞清楚，要做perspective correct interpolation，不然之后的ray marching 计算交点会有问题。</p>
-<p><img src="/2021/08/29/20210829collection/1631440892935.png" alt="Alt text"></p>
-<p>简单的说就是</p>
-<p>屏幕空间的uv插值的scale和view space下的不一样，如图中的s和t<br>屏幕空间的uv线性插值并不等于view space下的linear depth线性插值，是linear_depth倒数的线性插值</p>
-<h2 id="compute-shader-thread-count"><a href="#compute-shader-thread-count" class="headerlink" title="compute shader thread count"></a>compute shader thread count</h2><p><a target="_blank" rel="noopener" href="https://gpuopen.com/learn/optimizing-gpu-occupancy-resource-usage-large-thread-groups/">https://gpuopen.com/learn/optimizing-gpu-occupancy-resource-usage-large-thread-groups/</a><br><a target="_blank" rel="noopener" href="https://www.reddit.com/r/GraphicsProgramming/comments/aeyfkh/for_compute_shaders_is_there_an_ideal_numthreads/">https://www.reddit.com/r/GraphicsProgramming/comments/aeyfkh/for_compute_shaders_is_there_an_ideal_numthreads/</a><br>其实在写compute shader的时候，对于每一个线程组中线程数的个数不是很确定应该怎么定，在做SSGI的时候我也试过pixel shader和compute shader的性能，甚至发现compute shader的性能还不如pixel shader，对于不同的配置，这个线程数的定义应该也不一样，但是现在shader又是写死的，所以现在对这个的设置还是有点迷。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
+        <div class="article-info info-on-right">
+          
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -233,125 +219,134 @@
 	</div>
 
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/08/29/20210829collection/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
   
-<nav id="article-nav">
-  
-    <a href="/2021/09/05/20210905collection/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          2021.09.05
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2021/08/16/20210816collection/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">2021.08.16</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2021/03/21/20200321collection/" class="archive-article-date">
+  	<time datetime="2021-03-21T14:05:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-21</time>
+</a>
         </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#perspective-correct-interpolation"><span class="toc-number">1.</span> <span class="toc-text">perspective correct interpolation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#compute-shader-thread-count"><span class="toc-number">2.</span> <span class="toc-text">compute shader thread count</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2021/03/21/20200321collection/">2020.03.21</a>
+    </h1>
+  
+
+        <div class="article-info info-on-right">
+          
+          
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/collection//" class="article-tag-list-link color1">collection</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
         </div>
-        
-    </div>
-</aside>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2021/03/14/20210314collection/" class="archive-article-date">
+  	<time datetime="2021-03-14T10:00:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-14</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2021/03/14/20210314collection/">2021.03.14</a>
+    </h1>
+  
+
+        <div class="article-info info-on-right">
+          
+          
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/collection//" class="article-tag-list-link color1">collection</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
 
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2021/03/07/20210307collections/" class="archive-article-date">
+  	<time datetime="2021-03-07T14:21:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-07</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2021/03/07/20210307collections/">2021.03.07</a>
+    </h1>
+  
 
+        <div class="article-info info-on-right">
+          
+          
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/collection//" class="article-tag-list-link color1">collection</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
   
   
+    </div></section>
   
 
-  
-
-  
-
+    
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/categories/collection/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/categories/collection/">1</a><a class="page-number" href="/categories/collection/page/2/">2</a><span class="page-number current">3</span>
+    </nav>
   
 
 
@@ -375,10 +370,10 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
-		isCategory: false,
+		isCategory: true,
 		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",

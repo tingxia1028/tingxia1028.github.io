@@ -6,21 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>2021.08.29 | 亭下</title>
+  <title>2021.09.19 | 亭下</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="perspective correct interpolation compute shader thread count">
+  <meta name="description" content="ue motion blur shader 性能考虑 GPU的工作原理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2021.08.29">
-<meta property="og:url" content="http://example.com/2021/08/29/20210829collection/index.html">
+<meta property="og:title" content="2021.09.19">
+<meta property="og:url" content="http://example.com/2021/09/19/20210919collection/index.html">
 <meta property="og:site_name" content="亭下">
-<meta property="og:description" content="perspective correct interpolation compute shader thread count">
+<meta property="og:description" content="ue motion blur shader 性能考虑 GPU的工作原理">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2021/08/29/20210829collection/1631440892935.png">
-<meta property="article:published_time" content="2021-08-29T14:47:05.000Z">
-<meta property="article:modified_time" content="2022-02-04T03:14:32.525Z">
+<meta property="og:image" content="http://example.com/2021/09/19/20210919collection/1643946823759.png">
+<meta property="article:published_time" content="2021-09-19T14:47:05.000Z">
+<meta property="article:modified_time" content="2022-02-04T04:05:35.911Z">
 <meta property="article:author" content="ting.xia">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/08/29/20210829collection/1631440892935.png">
+<meta name="twitter:image" content="http://example.com/2021/09/19/20210919collection/1643946823759.png">
   
     <link rel="alternative" href="/atom.xml" title="亭下" type="application/atom+xml">
   
@@ -180,20 +180,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-20210829collection" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-20210919collection" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      2021.08.29
+      2021.09.19
     </h1>
   
 
         
-        <a href="/2021/08/29/20210829collection/" class="archive-article-date">
-  	<time datetime="2021-08-29T14:47:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-29</time>
+        <a href="/2021/09/19/20210919collection/" class="archive-article-date">
+  	<time datetime="2021-09-19T14:47:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-19</time>
 </a>
         
       </header>
@@ -201,17 +201,21 @@
     <div class="article-entry" itemprop="articleBody">
       
         <ul>
-<li><a href="#perspective-correct-interpolation">perspective correct interpolation</a></li>
-<li><a href="#compute-shader-thread-count">compute shader thread count</a></li>
+<li><a href="#ue-motion-blur">ue motion blur</a></li>
+<li><a href="#shader-%E6%80%A7%E8%83%BD%E8%80%83%E8%99%91">shader 性能考虑</a></li>
+<li><a href="#gpu%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86">GPU的工作原理</a></li>
 </ul>
 <span id="more"></span>
 
-<h2 id="perspective-correct-interpolation"><a href="#perspective-correct-interpolation" class="headerlink" title="perspective correct interpolation"></a>perspective correct interpolation</h2><p>chrome-extension://cdonnmffkdaoajfknoeeecmchibpmkmg/assets/pdf/web/viewer.html?file=https%3A%2F%2F<a href="http://www.comp.nus.edu.sg%2F~lowkl%2Fpublications%2Flowk_persp_interp_techrep.pdf">www.comp.nus.edu.sg%2F~lowkl%2Fpublications%2Flowk_persp_interp_techrep.pdf</a></p>
-<p>在做SSGI的时候，关于screen space 和 view space 下的插值换算需要搞搞清楚，要做perspective correct interpolation，不然之后的ray marching 计算交点会有问题。</p>
-<p><img src="/2021/08/29/20210829collection/1631440892935.png" alt="Alt text"></p>
-<p>简单的说就是</p>
-<p>屏幕空间的uv插值的scale和view space下的不一样，如图中的s和t<br>屏幕空间的uv线性插值并不等于view space下的linear depth线性插值，是linear_depth倒数的线性插值</p>
-<h2 id="compute-shader-thread-count"><a href="#compute-shader-thread-count" class="headerlink" title="compute shader thread count"></a>compute shader thread count</h2><p><a target="_blank" rel="noopener" href="https://gpuopen.com/learn/optimizing-gpu-occupancy-resource-usage-large-thread-groups/">https://gpuopen.com/learn/optimizing-gpu-occupancy-resource-usage-large-thread-groups/</a><br><a target="_blank" rel="noopener" href="https://www.reddit.com/r/GraphicsProgramming/comments/aeyfkh/for_compute_shaders_is_there_an_ideal_numthreads/">https://www.reddit.com/r/GraphicsProgramming/comments/aeyfkh/for_compute_shaders_is_there_an_ideal_numthreads/</a><br>其实在写compute shader的时候，对于每一个线程组中线程数的个数不是很确定应该怎么定，在做SSGI的时候我也试过pixel shader和compute shader的性能，甚至发现compute shader的性能还不如pixel shader，对于不同的配置，这个线程数的定义应该也不一样，但是现在shader又是写死的，所以现在对这个的设置还是有点迷。</p>
+
+<h2 id="ue-motion-blur"><a href="#ue-motion-blur" class="headerlink" title="ue motion blur"></a>ue motion blur</h2><p>使用多instance绘制，只使用vertex index的方式来<br><img src="/2021/09/19/20210919collection/1643946823759.png" alt="Alt text"><br>记得同事来问的时候，motion blur有一部是要根据一个范围内的最大最小velocity差来判断使用哪一种motion blur的策略，但是因为这个范围一开始是固定死的，所以在动静态物的边缘会留下一些残影的线条。这里就需要根据velocity来动态的确定这个范围，即在边缘这个范围要扩大。<br>ue的实现还蛮妙的，通过instance draw来实现一个，即每个tile只传递顶点的index，具体矩形的大小由velocity确定，这个大小会作为depth写入深度图，通过深度覆盖来保留更大的范围的值。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">VelocityScatterVS</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">	uint VId : SV_VertexID,</span></span></span><br><span class="line"><span class="function"><span class="params">	uint IId : SV_InstanceID,</span></span></span><br><span class="line"><span class="function"><span class="params">	out nointerpolation float4 OutColor : TEXCOORD0,</span></span></span><br><span class="line"><span class="function"><span class="params">	out float4 OutPosition : SV_POSITION)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	OutPosition = float4(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// needs to be the same on C++ side (faster on NVIDIA and AMD)</span></span><br><span class="line">	uint QuadsPerInstance = <span class="number">8</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// remap the indices to get vertexid to VId and quadid into IId</span></span><br><span class="line">	IId = IId * QuadsPerInstance + (VId / <span class="number">4</span>);</span><br><span class="line">	VId = VId % <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// triangle A: 0:left top, 1:right top, 2: left bottom</span></span><br><span class="line">	<span class="comment">// triangle B: 3:right bottom, 4:left bottom, 5: right top</span></span><br><span class="line">	float2 CornerOffset = float2(VId % <span class="number">2</span>, VId / <span class="number">2</span>) * <span class="number">2</span> - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">	uint2 PixelPos = uint2(IId % VelocityTile_ViewportMax.x, IId / VelocityTile_ViewportMax.x);</span><br><span class="line"></span><br><span class="line">	BRANCH</span><br><span class="line">	<span class="keyword">if</span> (PixelPos.y &gt;= VelocityTile_ViewportMax.y)</span><br><span class="line">	&#123;</span><br><span class="line">		OutColor = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	float2 SvPosition = PixelPos + <span class="number">0.5</span>;</span><br><span class="line"></span><br><span class="line">	float4 MinMaxVelocity = VelocityTileTexture[PixelPos];</span><br><span class="line">	OutColor = MinMaxVelocity;</span><br><span class="line"></span><br><span class="line">	float4 MinMaxVelocityPixels = MinMaxVelocity * MotionBlur_VelocityScaleForTiles;</span><br><span class="line">	float2 VelocityPixels = MinMaxVelocityPixels.zw;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Is the velocity small enough not to cover adjacent tiles?</span></span><br><span class="line">	BRANCH</span><br><span class="line">	<span class="keyword">if</span> (dot(VelocityPixels, VelocityPixels) * <span class="number">16</span> * <span class="number">16</span> &lt;= <span class="number">0.25</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		OutPosition.xy = (SvPosition + CornerOffset * <span class="number">0.5</span> - VelocityTile_ScreenPosToViewportBias) / VelocityTile_ScreenPosToViewportScale.xy;</span><br><span class="line">		OutPosition.z = <span class="number">0.0002</span>; <span class="comment">// zero clips</span></span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">float</span>  VelocityLengthPixelsSqr = dot(VelocityPixels, VelocityPixels);</span><br><span class="line">	<span class="keyword">float</span>  VelocityLengthPixelsInv = rsqrtFast(VelocityLengthPixelsSqr);</span><br><span class="line">	<span class="keyword">float</span>  VelocityLengthPixels = VelocityLengthPixelsSqr * VelocityLengthPixelsInv;</span><br><span class="line">	float2 VelocityDir = VelocityPixels * VelocityLengthPixelsInv;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Project pixel corner on to dir. This is the oriented extent of a pixel.</span></span><br><span class="line">	<span class="comment">// 1/2 pixel because shape is swept tile</span></span><br><span class="line">	<span class="comment">// +1/2 pixel for conservative rasterization</span></span><br><span class="line">	<span class="comment">// 99% to give epsilon before neighbor is filled. Otherwise all neighbors lie on edges of quad when no velocity in their direction.</span></span><br><span class="line">	<span class="comment">// dot(abs(VelocityDir), float2(1, 1))</span></span><br><span class="line">	<span class="keyword">float</span> Extent = <span class="built_in">abs</span>(VelocityDir.x) + <span class="built_in">abs</span>(VelocityDir.y);</span><br><span class="line">	CornerOffset *= float2(VelocityLengthPixels, <span class="number">0</span>) + Extent.xx * <span class="number">0.99</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Orient along velocity direction</span></span><br><span class="line">	float2 AxisX = VelocityDir;</span><br><span class="line">	float2 AxisY = float2(-VelocityDir.y, VelocityDir.x);</span><br><span class="line">	CornerOffset = AxisX * CornerOffset.x + AxisY * CornerOffset.y;</span><br><span class="line"></span><br><span class="line">	OutPosition.xy = (SvPosition + CornerOffset - VelocityTile_ScreenPosToViewportBias) / VelocityTile_ScreenPosToViewportScale;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Depth ordered by velocity length</span></span><br><span class="line">	OutPosition.z = (ScatterPass == VELOCITY_SCATTER_PASS_MAX) ? VelocityLengthPixels : length(MinMaxVelocityPixels.xy);</span><br><span class="line">	OutPosition.z = clamp(OutPosition.z / VelocityTile_ScreenPosToViewportScale.x * <span class="number">0.5</span>, <span class="number">0.0002</span>, <span class="number">0.999</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">VelocityScatterPS</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">	nointerpolation float4 InColor : TEXCOORD0,</span></span></span><br><span class="line"><span class="function"><span class="params">	out float4 OutColor : SV_Target0)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	OutColor = InColor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="shader-性能考虑"><a href="#shader-性能考虑" class="headerlink" title="shader 性能考虑"></a>shader 性能考虑</h2><ul>
+<li>if for</li>
+<li>hi-z 一个 pass 做完<br>hi-z要生成多个mipmap level的depth贴图，现在是一个level一个draw call完成的, 其实是用同步可以完成一个draw call绘制所有</li>
+</ul>
+<h2 id="GPU的工作原理"><a href="#GPU的工作原理" class="headerlink" title="GPU的工作原理"></a>GPU的工作原理</h2><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/zvideo/1421421171497304064">https://www.zhihu.com/zvideo/1421421171497304064</a></p>
 
       
 
@@ -281,7 +285,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/08/29/20210829collection/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/09/19/20210919collection/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -295,18 +299,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/09/05/20210905collection/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/09/26/20210926collection/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          2021.09.05
+          2021.09.26
         
       </div>
     </a>
   
   
-    <a href="/2021/08/16/20210816collection/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">2021.08.16</div>
+    <a href="/2021/09/12/20210912collection/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2021.09.12</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -333,7 +337,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#perspective-correct-interpolation"><span class="toc-number">1.</span> <span class="toc-text">perspective correct interpolation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#compute-shader-thread-count"><span class="toc-number">2.</span> <span class="toc-text">compute shader thread count</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ue-motion-blur"><span class="toc-number">1.</span> <span class="toc-text">ue motion blur</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#shader-%E6%80%A7%E8%83%BD%E8%80%83%E8%99%91"><span class="toc-number">2.</span> <span class="toc-text">shader 性能考虑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GPU%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">GPU的工作原理</span></a></li></ol>
                     </div>
                 </span>
             </div>
