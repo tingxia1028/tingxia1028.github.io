@@ -6,17 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives | 亭下</title>
+  <title>2022.04.03 | 亭下</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="刚柔并济 安适如常">
-<meta property="og:type" content="website">
-<meta property="og:title" content="亭下">
-<meta property="og:url" content="http://example.com/archives/index.html">
+  <meta name="description" content="UE 网络同步分享 many punctual lights shadow map">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2022.04.03">
+<meta property="og:url" content="http://example.com/2022/04/03/20220403collection/index.html">
 <meta property="og:site_name" content="亭下">
-<meta property="og:description" content="刚柔并济 安适如常">
+<meta property="og:description" content="UE 网络同步分享 many punctual lights shadow map">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/04/03/20220403collection/1648783748340.png">
+<meta property="og:image" content="http://example.com/2022/04/03/20220403collection/1648784019685.png">
+<meta property="og:image" content="http://example.com/2022/04/03/20220403collection/1648784194601.png">
+<meta property="article:published_time" content="2022-04-03T14:47:05.000Z">
+<meta property="article:modified_time" content="2022-04-06T01:55:02.502Z">
 <meta property="article:author" content="ting.xia">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/04/03/20220403collection/1648783748340.png">
   
     <link rel="alternative" href="/atom.xml" title="亭下" type="application/atom+xml">
   
@@ -176,37 +182,63 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-20220403collection" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      2022.04.03
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/04/03/20220403collection/" class="archive-article-date">
+
+        
+        <a href="/2022/04/03/20220403collection/" class="archive-article-date">
   	<time datetime="2022-04-03T14:47:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-03</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/04/03/20220403collection/">2022.04.03</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><a href="#ue-%E7%BD%91%E7%BB%9C%E5%90%8C%E6%AD%A5%E5%88%86%E4%BA%AB">UE 网络同步分享</a></li>
+<li><a href="#many-punctual-lights-shadow-map">many punctual lights shadow map</a></li>
+</ul>
+<span id="more"></span>
 
-        <div class="article-info info-on-right">
-          
-          
+<h2 id="UE-网络同步分享"><a href="#UE-网络同步分享" class="headerlink" title="UE 网络同步分享"></a>UE 网络同步分享</h2><ul>
+<li>package –&gt; bunch for each actor</li>
+<li>UDP 加上层简单实现的可靠通信，一次ACK</li>
+<li>同步应该同步哪些信息，比如精准的动画交互等，既要保证数据量的最小化，又要保证数据的</li>
+</ul>
+<h2 id="many-punctual-lights-shadow-map"><a href="#many-punctual-lights-shadow-map" class="headerlink" title="many punctual lights shadow map"></a>many punctual lights shadow map</h2><ul>
+<li>cubemap texture array</li>
+<li>atlas</li>
+<li>virtual texture</li>
+</ul>
+<h3 id="resources"><a href="#resources" class="headerlink" title="resources"></a>resources</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="http://www.adriancourreges.com/blog/2016/09/09/doom-2016-graphics-study/">http://www.adriancourreges.com/blog/2016/09/09/doom-2016-graphics-study/</a><br>Shadow Map Atlas<br>For each light casting a shadow, a unique depth map is generated and saved into one tile of a giant 8k x 8k texture atlas. However not every single depth map is calculated at every frame: DOOM heavily re-uses the result of the previous frame and regenerates only the depth maps which need to be updated.<br><img src="/2022/04/03/20220403collection/1648783748340.png" alt="Alt text"><br>When a light is static and casts shadows only on static objects it makes sense to simply keep its depth map as-is instead of doing unnecessary re-calculation. If some enemy is moving under the light though, the depth map must be generated again.<br>Depth map sizes can vary depending on the light distance from the camera, also re-generated depth maps don’t necessarily stay inside the same tile within the atlas.<br>DOOM has specific optimizations like caching the static portion of a depth map, computing then only the dynamic meshes projection and compositing the results.</p>
+</li>
+<li><p>source code —- Frosbite atlas<br>FrostbiteEngine/World/Render/Lighting/LocalLightShadowModule.cpp<br><img src="/2022/04/03/20220403collection/1648784019685.png" alt="Alt text"></p>
+</li>
+<li><p>source code —- UE</p>
+<ul>
+<li>atlas<br><img src="/2022/04/03/20220403collection/1648784194601.png" alt="Alt text"></li>
+<li>virtual shadow map<br><a target="_blank" rel="noopener" href="https://docs.unrealengine.com/5.0/en-US/RenderingFeatures/VirtualShadowMaps/">https://docs.unrealengine.com/5.0/en-US/RenderingFeatures/VirtualShadowMaps/</a></li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -219,362 +251,116 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/04/03/20220403collection/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/03/27/20220327collection/" class="archive-article-date">
-  	<time datetime="2022-03-27T14:47:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-27</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2022/03/27/20220327collection/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2022.03.27</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/03/27/20220327collection/">2022.03.27</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/collection//" class="article-tag-list-link color1">collection</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#UE-%E7%BD%91%E7%BB%9C%E5%90%8C%E6%AD%A5%E5%88%86%E4%BA%AB"><span class="toc-number">1.</span> <span class="toc-text">UE 网络同步分享</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#many-punctual-lights-shadow-map"><span class="toc-number">2.</span> <span class="toc-text">many punctual lights shadow map</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#resources"><span class="toc-number">2.1.</span> <span class="toc-text">resources</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/03/20/20220320collection/" class="archive-article-date">
-  	<time datetime="2022-03-20T14:47:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/03/20/20220320collection/">2022.03.20</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/collection//" class="article-tag-list-link color1">collection</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/03/13/20220313collection/" class="archive-article-date">
-  	<time datetime="2022-03-13T14:47:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-13</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/03/13/20220313collection/">2022.03.13</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/collection//" class="article-tag-list-link color1">collection</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/03/06/20220306collection/" class="archive-article-date">
-  	<time datetime="2022-03-06T14:47:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/03/06/20220306collection/">2022.03.06</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/collection//" class="article-tag-list-link color1">collection</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/27/20220227collection/" class="archive-article-date">
-  	<time datetime="2022-02-27T14:47:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/27/20220227collection/">2022.02.27</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/collection//" class="article-tag-list-link color1">collection</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/20/20220220collection/" class="archive-article-date">
-  	<time datetime="2022-02-20T14:47:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/20/20220220collection/">2022.02.20</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/collection//" class="article-tag-list-link color1">collection</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/02/13/20220213collection/" class="archive-article-date">
-  	<time datetime="2022-02-13T14:47:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/02/13/20220213collection/">2022.02.13</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/collection//" class="article-tag-list-link color1">collection</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/01/16/20220116collection/" class="archive-article-date">
-  	<time datetime="2022-01-16T14:47:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/01/16/20220116collection/">2022.01.16</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/collection//" class="article-tag-list-link color1">collection</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/01/09/20220109collection/" class="archive-article-date">
-  	<time datetime="2022-01-09T14:47:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/01/09/20220109collection/">2022.01.09</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/collection//" class="article-tag-list-link color1">collection</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/5/">5</a><a class="extend next" rel="next" href="/archives/page/2/">Next &amp;raquo;</a>
-    </nav>
   
 
 
@@ -598,8 +384,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
